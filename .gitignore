@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/FSE_ProjectManager/.vs/FSE_ProjectManager/v15/Server/sqlite3
+/FSE_ProjectManager/.vs/FSE_ProjectManager/v15
+/FSE_ProjectManager/FSE_ProjectManager/obj
