@@ -1,0 +1,14 @@
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\netcoreapp2.1\NUnit3.TestAdapter.dll
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\netcoreapp2.1\NUnit3.TestAdapter.pdb
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\netcoreapp2.1\nunit.engine.netstandard.dll
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\netcoreapp2.1\Mono.Cecil.dll
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\netcoreapp2.1\PM.Web.Tests.deps.json
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\netcoreapp2.1\PM.Web.Tests.runtimeconfig.json
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\netcoreapp2.1\PM.Web.Tests.runtimeconfig.dev.json
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\netcoreapp2.1\PM.Web.Tests.dll
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\netcoreapp2.1\PM.Web.Tests.pdb
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\obj\Debug\netcoreapp2.1\PM.Web.Tests.csproj.CoreCompileInputs.cache
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\obj\Debug\netcoreapp2.1\PM.Web.Tests.AssemblyInfoInputs.cache
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\obj\Debug\netcoreapp2.1\PM.Web.Tests.AssemblyInfo.cs
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\obj\Debug\netcoreapp2.1\PM.Web.Tests.dll
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\obj\Debug\netcoreapp2.1\PM.Web.Tests.pdb

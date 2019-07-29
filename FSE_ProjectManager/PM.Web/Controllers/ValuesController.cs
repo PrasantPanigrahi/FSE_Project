@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FSE_ProjectManager.Controllers
+namespace PM.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

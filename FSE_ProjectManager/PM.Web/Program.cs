@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace FSE_ProjectManager
+namespace PM.Web
 {
     public class Program
     {
@@ -19,6 +19,6 @@ namespace FSE_ProjectManager
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>(); 
+                .UseStartup<Startup>();
     }
 }

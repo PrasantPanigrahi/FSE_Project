@@ -1,0 +1,14 @@
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web\bin\Debug\netcoreapp2.1\PM.Web.deps.json
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web\bin\Debug\netcoreapp2.1\PM.Web.runtimeconfig.json
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web\bin\Debug\netcoreapp2.1\PM.Web.runtimeconfig.dev.json
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web\bin\Debug\netcoreapp2.1\PM.Web.dll
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web\bin\Debug\netcoreapp2.1\PM.Web.pdb
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web\obj\Debug\netcoreapp2.1\PM.Web.csproj.CoreCompileInputs.cache
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web\obj\Debug\netcoreapp2.1\PM.Web.RazorAssemblyInfo.cache
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web\obj\Debug\netcoreapp2.1\PM.Web.RazorAssemblyInfo.cs
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web\obj\Debug\netcoreapp2.1\PM.Web.AssemblyInfoInputs.cache
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web\obj\Debug\netcoreapp2.1\PM.Web.AssemblyInfo.cs
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web\obj\Debug\netcoreapp2.1\PM.Web.RazorTargetAssemblyInfo.cache
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web\obj\Debug\netcoreapp2.1\PM.Web.dll
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web\obj\Debug\netcoreapp2.1\PM.Web.pdb
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web\obj\Debug\netcoreapp2.1\PM.Web.csprojAssemblyReference.cache

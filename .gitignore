@@ -5,3 +5,9 @@
 /FSE_ProjectManager/.vs/FSE_ProjectManager/v15/Server/sqlite3
 /FSE_ProjectManager/.vs/FSE_ProjectManager/v15
 /FSE_ProjectManager/FSE_ProjectManager/obj
+/FSE_ProjectManager/PM.DAL/bin/Debug/netcoreapp2.1
+/FSE_ProjectManager/PM.DAL/obj
+/FSE_ProjectManager/PM.Models/obj
+/FSE_ProjectManager/PM.Models/bin/Debug/netcoreapp2.1
+/FSE_ProjectManager/PM.Utilities/bin/Debug/netcoreapp2.1
+/FSE_ProjectManager/PM.Utilities/obj
