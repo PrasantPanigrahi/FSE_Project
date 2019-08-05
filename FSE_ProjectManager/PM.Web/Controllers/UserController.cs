@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using PM.Extensions.DTO;
 
 namespace PM.Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/user")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class UserController : ControllerBase
     {
         // GET api/values
         [HttpGet]
@@ -19,9 +20,9 @@ namespace PM.Web.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult<UserDto> Get(int id)
         {
-            return "value";
+            return Ok(new UserDto() { FirstName = "Prasant"});
         }
 
         // POST api/values

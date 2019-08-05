@@ -11,3 +11,7 @@
 /FSE_ProjectManager/PM.Models/bin/Debug/netcoreapp2.1
 /FSE_ProjectManager/PM.Utilities/bin/Debug/netcoreapp2.1
 /FSE_ProjectManager/PM.Utilities/obj
+/FSE_ProjectManager/PM.Extensions/obj/Debug/netcoreapp2.1
+/FSE_ProjectManager/PM.Web/bin/Debug/netcoreapp2.1
+/FSE_ProjectManager/PM.Web/obj/Debug/netcoreapp2.1
+/FSE_ProjectManager/PM.Web.Tests/obj/Debug/netcoreapp2.1
