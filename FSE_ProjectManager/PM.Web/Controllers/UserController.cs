@@ -1,46 +1,80 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PM.Extensions.DTO;
+using PM.Extensions.Interfaces;
+using PM.Utilities.Filter;
+using System.Collections.Generic;
+using System.Net;
 
 namespace PM.Web.Controllers
 {
     [Route("api/user")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UserController : BaseController
     {
-        // GET api/values
+        private readonly IUserFacade _userFacade;
+
+        public UserController(IUserFacade userFacade)
+        {
+            _userFacade = userFacade;
+        }
+
+        [Route("search")]
+        [HttpPost()]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public ActionResult<FilterResult<UserDto>> Search([FromBody]FilterState filterState)
+        {
+            return Try(() =>
+            {
+                return Ok(_userFacade.Search(filterState));
+            });
+        }
+
+        [Route("getUserList")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        // GET: api/users/getUserList
+        public ActionResult<List<UserDto>> GetUserList()
         {
-            return new string[] { "value1", "value2" };
+            return Try(() =>
+            {
+                return Ok(_userFacade.GetAll());
+            });
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<UserDto> Get(int id)
+        [Route("{id}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [HttpGet]
+        // GET: api/user/1
+        public ActionResult<UserDto> GetUser(int id)
         {
-            return Ok(new UserDto() { FirstName = "Prasant"});
+            return Try(() =>
+            {
+                return Ok(_userFacade.Get(id));
+            });
         }
 
-        // POST api/values
+        [Route("update")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
         [HttpPost]
-        public void Post([FromBody] string value)
+        // POST: api/user/update
+        public ActionResult<UserDto> Update(UserDto user)
         {
+            return Try(() =>
+            {
+                return Ok(_userFacade.Update(user));
+            });
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [Route("delete/{id}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [HttpDelete]
+        // DELETE: api/user/5
+        public ActionResult<bool> Delete(int id)
         {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return Try(() =>
+            {
+                return Ok(_userFacade.Delete(id));
+            });
         }
     }
 }

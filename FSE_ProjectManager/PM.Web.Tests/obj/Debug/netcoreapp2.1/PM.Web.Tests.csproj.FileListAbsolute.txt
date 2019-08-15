@@ -12,3 +12,4 @@ C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\obj\Deb
 C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\obj\Debug\netcoreapp2.1\PM.Web.Tests.AssemblyInfo.cs
 C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\obj\Debug\netcoreapp2.1\PM.Web.Tests.dll
 C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\obj\Debug\netcoreapp2.1\PM.Web.Tests.pdb
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\obj\Debug\netcoreapp2.1\PM.Web.Tests.csprojAssemblyReference.cache

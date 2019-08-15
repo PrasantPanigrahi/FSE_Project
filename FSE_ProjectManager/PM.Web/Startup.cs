@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using PM.DAL.Repositories;
+using PM.DAL.Repositories.Interface;
+using PM.Extensions;
+using PM.Extensions.Interfaces;
 using Swashbuckle.AspNetCore.Filters;
 using Swashbuckle.AspNetCore.Swagger;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace PM.Web
 {
@@ -29,25 +28,36 @@ namespace PM.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddTransient<IUserFacade, UserFacade>();
+            services.AddTransient<IProjectFacade, ProjectFacade>();
+            services.AddTransient<ITaskFacade, TaskFacade>();
+            services.AddTransient<IParentTaskFacade, ParentTaskFacade>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IProjectRepository, ProjectRepository>();
+            services.AddTransient<ITaskRepository, TaskRepository>();
+            services.AddTransient<IParentTaskRepository, ParentTaskRepository>();
+
+            //add auto mapper
+            AutoMapperConfig.Initialize();
 
             //// https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
             //// Register the Swagger generator, defining 1 or more Swagger documents
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1", new Info
-            //    {
-            //        Title = "Chubb Meridian Booking System",
-            //        Version = "v1"
-            //    });
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Title = "Project Manager",
+                    Version = "v1"
+                });
 
-            //    // Set the comments path for the Swagger JSON and UI.
-            //    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-            //    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-            //    c.IncludeXmlComments(xmlPath);
-            //    c.ExampleFilters();
-            //});
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                //c.IncludeXmlComments(xmlPath);
+                c.ExampleFilters();
+            });
 
-            //services.AddSwaggerExamples();
+            services.AddSwaggerExamples();
 
             services.AddCors(opt =>
             {
@@ -72,17 +82,15 @@ namespace PM.Web
             app.UseMvc();
             app.UseCors("localhost");
 
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
-            //app.UseSwagger();
+            //Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
 
-            //// Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
-            //// specifying the Swagger JSON endpoint.
-            //app.UseSwaggerUI(c =>
-            //{
-            //    c.SwaggerEndpoint("../swagger/v1/swagger.json", "Project Manager API V1");
-            //}); 
- 
-
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Project Manager API V1");
+            });
         }
     }
 }
