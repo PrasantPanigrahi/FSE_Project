@@ -79,8 +79,8 @@ namespace PM.Web
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
             app.UseCors("localhost");
+            app.UseMvc();
 
             //Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();

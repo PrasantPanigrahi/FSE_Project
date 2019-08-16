@@ -2,6 +2,7 @@
 using PM.DAL.Filters;
 using PM.DAL.Repositories.Interface;
 using PM.DAL.Sort;
+using PM.Models;
 using PM.Utilities.Filter;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,11 @@ namespace PM.DAL.Repositories
         public FilterResult<Models.Task> Search(FilterState filterState)
         {
             var result = new FilterResult<Models.Task>();
-            IQueryable<Models.Task> query = Context.Tasks.Include(t=>t.ParentTask);
+            IQueryable<Models.Task> query = Context.Tasks
+                                                    .Include(t => t.ParentTask)
+                                                    .Include(t => t.Owner)
+                                                    .Include(t => t.Project);
+            
             if (filterState != null)
             {
                 // Filtering
@@ -65,5 +70,16 @@ namespace PM.DAL.Repositories
 
             return result;
         }
+
+        public override Task Get(int id)
+        {
+            return Context.Tasks.Include(t => t.ParentTask)
+                                                    .Include(t => t.Owner)
+                                                    .Include(t => t.Project)
+                                                    .Where(t => t.Id == id)
+                                                    .First();
+        }
+
+
     }
 }
