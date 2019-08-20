@@ -1,1 +1,78 @@
-<p>project-detail works!</p>
+<div class="content-heading">Project Details</div>
+<div class="row">
+  <div class="col-xl-12">
+    <form *ngIf="ready" #f="ngForm" novalidate>
+      <fieldset>
+        <legend>Details</legend>
+        <div class="row">
+          <div class="col-xl-8">
+            <div class="form-group">
+              <div class="ui-g-12 ui-md-3"><label for="name"><strong>Project</strong><strong
+                    style="color: red">*</strong></label></div>
+              <div class="ui-g-12 ui-md-9">
+                <input name="name" id="name" type="text" size="30" pInputText [(ngModel)]="currentProject.name"
+                  maxlength=200 placeholder="- Project Title -" required
+                  [ngClass]="{'ng-invalid': f.invalid && f.touched }">
+                <div class=" text-danger" *ngIf=" f.invalid && f.touched "><em>Project Title is required</em></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="ui-g-12 ui-md-3"><label for="priority"><strong>Priority</strong> <strong
+                    style="color: red">*</strong></label></div>
+              <div class="ui-g-12 ui-md-9">
+                <span> <strong>{{currentProject.priority}}</strong></span>
+                <p-slider name="priority" [style]="{'width':'250px', 'margin-top':'8px'}"
+                  [(ngModel)]="currentProject.priority" label="priority" [min]="0" [max]="10"></p-slider>
+              </div>
+            </div>
+            <div class="form-group">
+
+              <div class="ui-g-12 ui-md-3"><label for="manager"><strong>Manager</strong> <strong
+                    style="color: red">*</strong></label></div>
+              <div class="ui-g-12 ui-md-9">
+                <p-dropdown name="manager" id="manager" [options]="managerOptions" [(ngModel)]="selectedManager"
+                  (onChange)="onManagerChange($event)" optionLabel="displayName" filter="true" [dataKey]="'id'"
+                  autoDisplayFirst="false" [style]="{'width':'250px'}" placeholder="- Choose Manager -"></p-dropdown>
+              </div>
+            </div>
+            <div class="form-group">
+
+              <div class="ui-g-12 ui-md-3"><label for="isSetDate"><strong></strong></label></div>
+              <div class="ui-g-12 ui-md-9">
+                <p-checkbox name="isSetDate" id="isSetDate" [(ngModel)]="isSetDate" checked="checked" binary="true"
+                  label="Set Start date and End Date"></p-checkbox>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="ui-g-12 ui-md-3"><label for="startDate"><strong>Start Date</strong> </label></div>
+              <div class="ui-g-12 ui-md-9">
+                <p-calendar [disabled]="!isSetDate" name="startDate" id="startDate" type="text" [yearNavigator]="true"
+                  [monthNavigator]="true" yearRange="1900:3030" [showIcon]="true" dateFormat="mm/dd/yy"
+                  [(ngModel)]="startDate" placeholder="- Start Date -">
+                </p-calendar>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="ui-g-12 ui-md-3"><label for="endDate"><strong>End Date</strong> </label></div>
+              <div class="ui-g-12 ui-md-9">
+                <p-calendar [disabled]="!isSetDate" name="endDate" id="endDate" type="text" [yearNavigator]="true"
+                  [monthNavigator]="true" yearRange="1900:3030" [showIcon]="true" dateFormat="mm/dd/yy"
+                  [(ngModel)]="endDate" placeholder="- End Date -">
+                </p-calendar>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </fieldset>
+
+      <p-footer>
+        <button [disabled]="f.invalid" pButton type="submit" label="Save" icon="pi pi-check" style="margin-right: .25em"
+          (click)="save()" [disabled]="false"></button>
+        <button pButton type="button" label="Back" icon="pi pi-times" class="ui-button-danger"
+          (click)="back()"></button>
+      </p-footer>
+
+    </form>
+  </div>
+</div>

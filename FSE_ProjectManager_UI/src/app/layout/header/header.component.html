@@ -1,0 +1,44 @@
+<!-- START Top Navbar-->
+<!-- <nav class="navbar topnavbar" role="navigation">  
+  <div class="navbar-header">
+    <a class="navbar-brand " [routerLink]="['/user']">
+      <div class="brand">Project Manager</div>
+    </a>
+  </div>
+</nav> -->
+
+
+<nav class="navbar navbar-expand-md bg-primary navbar-dark fixed-top">
+    <a class="navbar-brand" href="#">Project Manager</a>
+     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+       aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+     </button>
+     <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">   
+         <li class="nav-item">
+           <a class="nav-link" routerLink="/user/list"><span> Users</span></a>
+         </li>
+         <li class="nav-item">
+           <a class="nav-link " routerLink="/project/list">Project</a>
+         </li>
+         <li class="nav-item">
+           <a class="nav-link" routerLink="/task/list">Task</a>
+         </li>   
+       </ul>  
+
+        <!-- <ul class="navbar-nav mr-auto">
+          <li *ngFor='let item of menuItems' [ngClass]="{'nav-heading': item.heading}" [routerLinkActive]="['active']">
+           
+            <a href *ngIf="!item.heading && !item.submenu && !item.elink" [routerLink]="item.link" [attr.route]="item.link"
+              title="{{item.text}}" (click)="toggleSubmenuClick($event)" (mouseenter)="toggleSubmenuHover($event)">
+              <span class="float-right" *ngIf="item.alert"
+                [ngClass]="item.label || 'badge badge-success'">{{item.alert}}</span>
+              <em class="{{item.icon}}" *ngIf="item.icon"></em>
+              <span>{{(item.translate | translate) || item.text}}</span>
+            </a>       
+          </li>
+        </ul>  -->
+     </div>
+   </nav>
+

@@ -1,1 +1,160 @@
 /* You can add global styles to this file, and also import other style files */
+
+//== Vendor
+@import '~@fortawesome/fontawesome-free/css/brands.css';
+@import '~@fortawesome/fontawesome-free/css/regular.css';
+@import '~@fortawesome/fontawesome-free/css/solid.css';
+@import '~@fortawesome/fontawesome-free/css/fontawesome.css';
+
+@import '~font-awesome/css/font-awesome.css';
+@import '~simple-line-icons/css/simple-line-icons.css';
+//== Bootstrap
+@import "./app/shared/styles/bootstrap.scss";
+//== Application
+@import "./app/shared/styles/app.scss";
+// application styles
+@import "./app/shared/styles/bootstrap/_functions.scss";
+@import "./app/shared/styles/bootstrap/_variables.scss";
+@import "./app/shared/styles/bootstrap/_mixins";
+@import './app/shared/styles/app/variables.scss';
+
+.order-max-lg-container {
+  margin: 0 auto;
+  // max-width: map-get($container-max-widths, "lg");
+}
+
+.content-section.introduction {
+  background-image: linear-gradient(to left, #2bc0ec, #1b81d7);
+  color: #fff;
+}
+
+.content-section {
+  display: block;
+  padding: 30px;
+  overflow: hidden;
+  background-color: #f5f7f8;
+}
+
+.content-section:first-of-type>div>span {
+  line-height: 1.5em;
+}
+
+.feature-title {
+  font-size: 30px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+body {
+  line-height: 1.4 !important;
+}
+
+input.ng-dirty.ng-invalid.ng-touched {
+  border-color: red
+}
+
+input.ng-invalid.ng-touched {
+  border-color: red
+}
+
+select.ng-invalid {
+  border-color: red
+}
+
+p-autocomplete.ng-invalid>span>input {
+  border-color: red
+}
+
+p-dropdown.ng-invalid>div>label {
+  border-color: red
+}
+
+.code-label {
+  color: #FF3383 !important;
+  font-weight: bolder;
+}
+
+a.link-button:hover {
+  text-decoration: underline !important;
+  cursor: hand;
+}
+
+.negative-curr {
+  color: crimson
+}
+
+.positive-curr {
+  color: blue
+}
+
+@media only all {
+
+  th.ui-p-6,
+  td.ui-p-6,
+  th.ui-p-5,
+  td.ui-p-5,
+  th.ui-p-4,
+  td.ui-p-4,
+  th.ui-p-3,
+  td.ui-p-3,
+  th.ui-p-2,
+  td.ui-p-2,
+  th.ui-p-1,
+  td.ui-p-1 {
+    display: none;
+  }
+}
+
+/* Show priority 1 at 320px (20em x 16px) */
+@media screen and (min-width: 20em) {
+
+  th.ui-p-1,
+  td.ui-p-1 {
+    display: table-cell;
+  }
+}
+
+/* Show priority 2 at 480px (30em x 16px) */
+@media screen and (min-width: 30em) {
+
+  th.ui-p-2,
+  td.ui-p-2 {
+    display: table-cell;
+  }
+}
+
+/* Show priority 3 at 640px (40em x 16px) */
+@media screen and (min-width: 40em) {
+
+  th.ui-p-3,
+  td.ui-p-3 {
+    display: table-cell;
+  }
+}
+
+/* Show priority 4 at 800px (50em x 16px) */
+@media screen and (min-width: 50em) {
+
+  th.ui-p-4,
+  td.ui-p-4 {
+    display: table-cell;
+  }
+}
+
+/* Show priority 5 at 960px (60em x 16px) */
+@media screen and (min-width: 60em) {
+
+  th.ui-p-5,
+  td.ui-p-5 {
+    display: table-cell;
+  }
+}
+
+/* Show priority 6 at 1,120px (70em x 16px) */
+@media screen and (min-width: 70em) {
+
+  th.ui-p-6,
+  td.ui-p-6 {
+    display: table-cell;
+  }
+}

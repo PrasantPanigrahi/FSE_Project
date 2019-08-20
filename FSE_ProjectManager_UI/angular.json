@@ -28,18 +28,36 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/nova-dark/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/quill/dist/quill.core.css",
+              "node_modules/quill/dist/quill.snow.css",
+              "src/app/core/preloader/preloader.scss",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.js",
+              "src/app/core/preloader/preloader.js",
+              "node_modules/popper.js/dist/umd/popper.js",
+              "node_modules/chart.js/dist/Chart.bundle.js",
+              "node_modules/jqcloud2/dist/jqcloud.js",
+              "node_modules/bootstrap/js/dist/util.js",
+              "node_modules/bootstrap/js/dist/modal.js",
+              "node_modules/bootstrap/js/dist/dropdown.js",
+              "node_modules/bootstrap/js/dist/tooltip.js",
+              "node_modules/summernote/dist/summernote.js",
+              "node_modules/moment/min/moment-with-locales.min.js",
+              "node_modules/fullcalendar/dist/fullcalendar.js",
+              "node_modules/quill/dist/quill.js"
+            ]
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
+              "fileReplacements": [{
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.prod.ts"
+              }],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -49,13 +67,11 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                }
-              ]
+              "budgets": [{
+                "type": "initial",
+                "maximumWarning": "2mb",
+                "maximumError": "5mb"
+              }]
             }
           }
         },
@@ -119,6 +135,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "UI"
 }

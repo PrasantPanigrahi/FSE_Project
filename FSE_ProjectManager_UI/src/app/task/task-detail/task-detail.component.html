@@ -1,1 +1,109 @@
-<p>task-detail works!</p>
+<div class="content-heading">Task Details</div>
+<div class="row">
+  <div class="col-xl-12">
+    <form *ngIf="ready" #f="ngForm" autocomplete="off" novalidate>
+      <fieldset>
+        <legend>Details</legend>
+
+        <div class="row">
+          <div class="col-xl-8">
+            <div class="form-group">
+              <div class="ui-g-12 ui-md-3"><label for="name"><strong>Task</strong> <strong
+                    style="color: red">*</strong></label></div>
+              <div class="ui-g-12 ui-md-9">
+                <input name="name" id="name" type="text" size="30" pInputText [(ngModel)]="currentTask.name"
+                  maxlength=200 placeholder="- Task Name -" required
+                  [ngClass]="{'ng-invalid': f.invalid && f.touched }">
+                <div class=" text-danger" *ngIf=" f.invalid && f.touched "><em>Task name is required</em></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="ui-g-12 ui-md-3"><label for="isParentTask"><strong></strong></label></div>
+              <div class="ui-g-12 ui-md-9">
+                <p-checkbox [disabled]="readonly" name="isParentTask" id="active" [(ngModel)]="isParentTask"
+                  checked="checked" binary="true" label="Parent Task"></p-checkbox>
+              </div>
+            </div>
+            <div *ngIf="!isParentTask">
+              <div class="form-group">
+                <div class="ui-g-12 ui-md-3"><label for="parentTask"><strong>Parent Task</strong></label></div>
+                <div class="ui-g-12 ui-md-9">
+                  <p-dropdown name="parentTask" id="parentTask" [options]="parentTaskOptions"
+                    [(ngModel)]="selectedParentTask" (onChange)="onParentTaskChange($event)" optionLabel="name"
+                    filter="true" [dataKey]="'id'" autoDisplayFirst="false" [style]="{'width':'250px'}"
+                    placeholder="- Choose Parent Task -"></p-dropdown>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="ui-g-12 ui-md-3"><label for="priority"><strong>Priority</strong> <strong
+                      style="color: red">*</strong></label></div>
+                <div class="ui-g-12 ui-md-9">
+                  <span> <strong>{{currentTask.priority}}</strong></span>
+                  <p-slider name="priority" [style]="{'width':'250px', 'margin-top':'8px'}"
+                    [(ngModel)]="currentTask.priority" label="priority" [min]="0" [max]="10"></p-slider>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="ui-g-12 ui-md-3"><label for="project"><strong>Project</strong> <strong
+                      style="color: red">*</strong></label></div>
+                <div class="ui-g-12 ui-md-9">
+                  <div *ngIf="!readonly">
+                    <p-dropdown name="project" id="project" [options]="projectOptions" [(ngModel)]="selectedProject"
+                      (onChange)="onProjectChange($event)" optionLabel="name" filter="true" [dataKey]="'id'"
+                      autoDisplayFirst="false" [style]="{'width':'250px'}" placeholder="- Choose Project -">
+                    </p-dropdown>
+                  </div>
+                  <div *ngIf="readonly" style="width: 100%">
+                    <label [innerHTML]="currentTask.projectName" class="code-label"></label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="ui-g-12 ui-md-3"><label for="owner"><strong>Owner</strong> <strong
+                      style="color: red">*</strong></label></div>
+                <div class="ui-g-12 ui-md-9">
+                  <div *ngIf="!readonly">
+                    <p-dropdown name="owner" id="owner" [options]="ownerOptions" [(ngModel)]="selectedOwner"
+                      (onChange)="onOwnerChange($event)" optionLabel="displayName" filter="true" [dataKey]="'id'"
+                      autoDisplayFirst="false" [style]="{'width':'250px'}" placeholder="- Choose Owner -"></p-dropdown>
+                  </div>
+                  <div *ngIf="readonly" style="width: 100%">
+                    <label [innerHTML]="currentTask.ownerName" class="code-label"></label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="ui-g-12 ui-md-3"><label for="startDate"><strong>Start Date</strong> <strong
+                      style="color: red">*</strong></label></div>
+                <div class="ui-g-12 ui-md-9">
+                  <p-calendar name="startDate" id="startDate" type="text" [yearNavigator]="true" [monthNavigator]="true"
+                    yearRange="1900:3030" [showIcon]="true" dateFormat="yymmdd" [(ngModel)]="startDate"
+                    placeholder="- Start Date -">
+                  </p-calendar>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="ui-g-12 ui-md-3"><label for="endDate"><strong>End Date</strong> <strong
+                      style="color: red">*</strong></label></div>
+                <div class="ui-g-12 ui-md-9">
+                  <p-calendar name="endDate" id="endDate" type="text" [yearNavigator]="true" [monthNavigator]="true"
+                    yearRange="1900:3030" [showIcon]="true" dateFormat="yymmdd" [(ngModel)]="endDate"
+                    placeholder="- End Date -">
+                  </p-calendar>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <p-footer>
+        <button [disabled]="f.invalid" pButton type="submit" label="Save" icon="pi pi-check" style="margin-right: .25em"
+          (click)="save()" [disabled]="false"></button>
+        <button pButton type="button" label="Back" icon="pi pi-times" class="ui-button-danger"
+          (click)="back()"></button>
+      </p-footer>
+
+    </form>
+  </div>
+</div>

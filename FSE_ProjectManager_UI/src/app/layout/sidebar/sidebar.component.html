@@ -1,0 +1,19 @@
+<!-- START Sidebar (left)-->
+<div class="table-responsive">   
+    <!-- START sidebar nav-->
+    <table class="table">
+      <tr>        
+        <th *ngFor='let item of menuItems' [ngClass]="{'nav-heading': item.heading}" [routerLinkActive]="['active']">	 
+          <a href *ngIf="!item.heading && !item.submenu && !item.elink" [routerLink]="item.link" [attr.route]="item.link"
+            title="{{item.text}}" (click)="toggleSubmenuClick($event)" (mouseenter)="toggleSubmenuHover($event)">
+            <span class="float-right" *ngIf="item.alert"
+              [ngClass]="item.label || 'badge badge-success'">{{item.alert}}</span>
+            <em class="{{item.icon}}" *ngIf="item.icon"></em>
+            <span>{{(item.translate | translate) || item.text}}</span>
+          </a>         
+        </th>
+      </tr>  
+  </table>  
+    <!-- END sidebar nav-->
+</div>
+<!-- END Sidebar (left)-->

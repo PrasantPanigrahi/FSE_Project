@@ -1,2 +1,15 @@
-<p>layout works!</p>
-<router-outlet></router-outlet>
+<div class="wrapper">
+  <!-- top navbar-->
+  <app-header class="topnavbar-wrapper"></app-header>
+
+   <!-- sidebar-->
+  <!-- <app-sidebar ></app-sidebar> -->
+  
+  <!-- Main section-->
+  <div class="content-wrapper">
+    <router-outlet></router-outlet>
+  </div>
+
+  <!-- Page footer-->
+  <footer class="footer-container" app-footer></footer>
+</div>

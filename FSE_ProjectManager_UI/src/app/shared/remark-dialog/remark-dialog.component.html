@@ -1,0 +1,18 @@
+<label for="reason"><strong>{{label}}</strong></label>
+&nbsp;&nbsp;
+
+<p-editor name="description" id="description" [(ngModel)]="remark" [style]="{'width':'320px', 'height':'160px'}"
+  [class.ng-invalid]="invalid">
+  <p-header>
+    <span class="ql-formats">
+      <button class="ql-bold" aria-label="Bold"></button>
+      <button class="ql-italic" aria-label="Italic"></button>
+      <button class="ql-underline" aria-label="Underline"></button>
+    </span>
+  </p-header>
+</p-editor>
+
+<p-message *ngIf="invalid" severity="error" [text]="requiredErrorMessage"></p-message>
+
+<br><br>
+<p-button icon="pi pi-angle-right" iconPos="right" label="Continue" (click)="confirm('confirm')"></p-button>

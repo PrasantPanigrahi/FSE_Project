@@ -1,2 +1,50 @@
-<p>user-list works!</p>
-{{user?.firstName}}
+<div class="content-heading">Users</div>
+<div class="d-flex justify-content-between">
+  <div style="margin-bottom: 10px">
+    <button pButton type="submit" label="Add New" style="margin-right: .25em" (click)="addNewUser()"></button>
+  </div>
+</div>
+<p-table #dt [value]="users" [columns]="cols" [responsive]="true" [paginator]="true" [lazy]="true"
+  (onLazyLoad)="loadUserLazy($event)" [loading]="loading" [rows]="filterStateService.rows" [totalRecords]="totalRecords"
+  [rowsPerPageOptions]="filterStateService.rowsPerPageOptions" [paginator]="true" [(selection)]="selectedUser"
+  dataKey="id" editMode="row" [scrollable]="true" [resizableColumns]="true" [style]="{'width':'100%'}"
+  scrollHeight="250px" >
+  <ng-template pTemplate="header" let-columns >   
+    <tr >      
+      <th style="width:8em"></th>
+      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+        {{col.header}}
+        <p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
+          ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+        </p-sortIcon>
+      </th>     
+    </tr>  
+    <tr>
+      <th style="width:8em"></th>
+      <th *ngFor="let col of columns" [ngSwitch]="col.field">
+        <input pInputText type="text" (keyup)="filterListHelper.onKeyup($event.target.value, col.field)"
+          style="width: 100%">
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr>
+      <td style="width:8em">
+        <button pButton icon="far fa-edit" (click)="edit(rowData)"></button>
+        <button style="margin-left: .5em" pButton icon="fa fa-trash" (click)="removeUser(rowData)"></button>
+      </td>
+      <td *ngFor="let col of columns ">
+        <span class="ui-column-title">{{col.header}}</span>
+        {{rowData[col.field]}}
+      </td>
+
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage" let-columns>
+    <tr>
+      <td [attr.colspan]="columns.length">
+        No records found
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

@@ -1,1 +1,70 @@
-<p>task-list works!</p>
+<div class="content-heading">Tasks</div>
+<div class="d-flex justify-content-between">
+  <div style="margin-bottom: 10px">
+    <button pButton type="submit" label="Add New" style="margin-right: .25em" (click)="addNewTask()"></button>
+  </div>
+</div>
+<p-table #dt [value]="tasks" [columns]="cols" [responsive]="true" [paginator]="true" [lazy]="true"
+  (onLazyLoad)="loadTaskLazy($event)" [loading]="loading" [rows]="filterStateService.rows" [totalRecords]="totalRecords"
+  [rowsPerPageOptions]="filterStateService.rowsPerPageOptions" [paginator]="true" [(selection)]="selectedTask"
+  dataKey="id" editMode="row" [scrollable]="true" [resizableColumns]="true" [style]="{'width':'100%'}"
+  scrollHeight="250px">
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th style="width:8em"></th>
+      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+        {{col.header}}
+        <p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
+          ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+        </p-sortIcon>
+      </th>
+    </tr>
+    <tr>
+      <th style="width:8em"></th>
+      <th *ngFor="let col of columns" [ngSwitch]="col.field" [ngSwitch]="col.field">
+        <div *ngSwitchCase="'priority'">
+          Value>= {{priorityFilter}}
+          <i *ngIf="priorityFilter" class="fa fa-close"
+            (click)="priorityFilter=null;filterListHelper.onKeyup(0, 'priority','gte')" style="cursor:pointer"></i>
+          <p-slider [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="priorityFilter" [min]="0" [max]="10"
+            (onChange)="filterListHelper.onKeyup(priorityFilter, 'priority','gte')">
+          </p-slider>
+        </div>
+
+        <div *ngSwitchCase="'isCompleted'" class="ui-g">
+        </div>
+        <div *ngSwitchCase="'startDate'" class="ui-g">
+        </div>
+
+        <div *ngSwitchCase="'endDate'" class="ui-g">
+        </div>
+
+        <input *ngSwitchDefault pInputText type="text"
+          (keyup)="filterListHelper.onKeyup($event.target.value, col.field)" style="width: 100%">
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr>
+      <td style="width:8em">
+        <button [disabled]="rowData['statusId']==3" pButton icon="far fa-edit" (click)="edit(rowData)"></button>
+        <button *ngIf="rowData['statusId']!=3" style="margin-left: .5em" pButton icon="fa fa-check"
+          (click)="changeTaskState(rowData, true)"></button>
+        <button *ngIf="rowData['statusId']==3" style="margin-left: .5em" pButton icon="fa fa-undo"
+          (click)="changeTaskState(rowData, false)"></button>
+      </td>
+      <td *ngFor="let col of columns ">
+        <span class="ui-column-title">{{col.header}}</span>
+        {{rowData[col.field]}}
+      </td>
+
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage" let-columns>
+    <tr>
+      <td [attr.colspan]="columns.length">
+        No records found
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
