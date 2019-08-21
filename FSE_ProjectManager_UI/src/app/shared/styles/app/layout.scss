@@ -138,11 +138,11 @@ body {
         align-items: center;
         font-size: 1.5rem;
         line-height: $headings-line-height;
-        color: #929292;
+        color: black;
         margin: -15px;
         margin-bottom: 20px;
-        padding: 15px;
-        font-weight: normal;
+        padding: 15px; 
+        font-weight: bold;
         background-color: $content-heading-bg;
         border-bottom: 1px solid $content-heading-border;
         small {

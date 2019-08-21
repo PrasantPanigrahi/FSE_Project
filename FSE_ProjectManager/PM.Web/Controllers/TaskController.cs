@@ -4,6 +4,7 @@ using PM.Extensions.DTO;
 using PM.Extensions.Interfaces;
 using PM.Utilities.Filter;
 using System;
+using System.Collections.Generic;
 
 namespace PM.Web.Controllers
 {
@@ -18,10 +19,10 @@ namespace PM.Web.Controllers
             _taskFacade = taskFacade;
         }   
 
-        [Route("query")]
+        [Route("search")]
         [HttpPost()]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<FilterResult<TaskDto>> Query([FromBody]FilterState filterState)
+        public ActionResult<FilterResult<TaskDto>> Search([FromBody]FilterState filterState)
         {
             return Try(() =>
             {
@@ -33,7 +34,7 @@ namespace PM.Web.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
         // GET: api/task/getTasks
-        public ActionResult<TaskDto> GetTasks()
+        public ActionResult<List<TaskDto>> GetTasks()
         {
             return Try(() =>
             {

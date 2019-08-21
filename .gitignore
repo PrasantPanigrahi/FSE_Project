@@ -15,3 +15,8 @@
 /FSE_ProjectManager/PM.Web/bin/Debug/netcoreapp2.1
 /FSE_ProjectManager/PM.Web/obj/Debug/netcoreapp2.1
 /FSE_ProjectManager/PM.Web.Tests/obj/Debug/netcoreapp2.1
+/FSE_ProjectManager_UI/.vs
+/.vs
+/FSE_ProjectManager/PM.Web/bin/Debug/netcoreapp2.2
+/FSE_ProjectManager/PM.Web/obj/Debug/netcoreapp2.2
+/FSE_ProjectManager/PM.Web/obj/Release/netcoreapp2.2
