@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "1f9ef6ea71402eca9db48426aaaa9c90c98f06ff"
+    "signature": "de335afe16fa8a4595d6474659216cab3022dcb6"
   },
   "compilationOptions": {},
   "targets": {
@@ -21,6 +21,7 @@
           "PM.Models": "1.0.0",
           "PM.Utilities": "1.0.0",
           "PM.Web": "1.0.0",
+          "ReportGenerator": "4.2.15",
           "NUnit": "3.11.0"
         },
         "runtime": {
@@ -1302,6 +1303,7 @@
           }
         }
       },
+      "ReportGenerator/4.2.15": {},
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
         "runtimeTargets": {
           "runtime/debian.8-x64/native/_._": {
@@ -3352,6 +3354,13 @@
       "sha512": "sha512-fK/76UmpC0FXBlGDFVPLJHQlDLYnGC+XY3eoDgCgbtrhi0vzbXDQ3n/IYHhqSKqXQfGw/u04A1drWs7rFVkRjw==",
       "path": "remotion.linq/2.2.0",
       "hashPath": "remotion.linq.2.2.0.nupkg.sha512"
+    },
+    "ReportGenerator/4.2.15": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9vkfjxPGskAwi01YZ3pk4Of9HchDnil/qm+ZX03AC40bJBnMqcftVV9H6euToPmvMEsVUlrzLwyS/ykLIFdpjQ==",
+      "path": "reportgenerator/4.2.15",
+      "hashPath": "reportgenerator.4.2.15.nupkg.sha512"
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
       "type": "package",

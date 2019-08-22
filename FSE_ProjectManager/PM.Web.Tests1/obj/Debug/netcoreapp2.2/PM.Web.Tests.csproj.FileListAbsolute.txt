@@ -23,3 +23,4 @@ C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests1\obj\De
 C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests1\bin\Debug\netcoreapp2.2\PM.Web.Tests.pdb
 C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests1\obj\Debug\netcoreapp2.2\PM.Web.Tests.dll
 C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests1\obj\Debug\netcoreapp2.2\PM.Web.Tests.pdb
+C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests1\bin\Debug\netcoreapp2.2\appsettings.json

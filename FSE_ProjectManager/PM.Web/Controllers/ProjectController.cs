@@ -22,7 +22,7 @@ namespace PM.Web.Controllers
         [Route("search")]
         [HttpPost()]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public ActionResult<FilterResult<ProjectDto>> Query([FromBody]FilterState filterState)
+        public ActionResult<FilterResult<ProjectDto>> Search([FromBody]FilterState filterState)
         {
             return Try(() =>
             {
