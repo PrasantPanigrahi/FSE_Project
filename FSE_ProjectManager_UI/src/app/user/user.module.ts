@@ -4,6 +4,7 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { NameValidatorDirective } from './user-detail/name-validator.directive';
 
 const routes: Routes = [
   { path: 'list', component: UserListComponent },
@@ -13,7 +14,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [UserListComponent, UserDetailComponent],
+  declarations: [UserListComponent, UserDetailComponent, NameValidatorDirective],
   imports: [
     CommonModule,
     SharedModule,

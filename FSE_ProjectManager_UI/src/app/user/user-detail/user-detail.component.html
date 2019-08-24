@@ -11,7 +11,7 @@
                   <strong style="color: red">*</strong></label></div>
               <div class="ui-g-12 ui-md-9">
                 <input formControlName="firstName" name="firstName" id="ud_firstName" type="text" size="40" pInputText
-                  maxlength=200 placeholder="- First Name -" appValidateName>
+                  maxlength=200 placeholder="- First Name -" (change)="onLastNameChange()" appValidateName>
                 <div class="text-danger" *ngIf="!validateName()"><em>Either First Name or Last name is required.</em>
                 </div>
               </div>

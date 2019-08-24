@@ -27,7 +27,7 @@ namespace PM.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddTransient<IUserFacade, UserFacade>();
             services.AddTransient<IProjectFacade, ProjectFacade>();
             services.AddTransient<ITaskFacade, TaskFacade>();
@@ -46,7 +46,7 @@ namespace PM.Web
             {
                 c.SwaggerDoc("v1", new Info
                 {
-                    Title = "Project Manager",
+                    Title = "FSE-Project Manager",
                     Version = "v1"
                 });
 
@@ -89,7 +89,7 @@ namespace PM.Web
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Project Manager API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "FSE-Project Manager API V1");
             });
         }
     }

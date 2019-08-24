@@ -77,6 +77,7 @@ namespace PM.DAL.Repositories
                                                     .Include(t => t.Owner)
                                                     .Include(t => t.Project)
                                                     .Where(t => t.Id == id)
+                                                    .DefaultIfEmpty()
                                                     .First();
         }
 

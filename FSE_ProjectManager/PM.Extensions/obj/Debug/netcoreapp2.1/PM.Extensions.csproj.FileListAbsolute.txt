@@ -1,8 +1,0 @@
-C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Extensions\bin\Debug\netcoreapp2.1\PM.Extensions.deps.json
-C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Extensions\bin\Debug\netcoreapp2.1\PM.Extensions.dll
-C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Extensions\bin\Debug\netcoreapp2.1\PM.Extensions.pdb
-C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Extensions\obj\Debug\netcoreapp2.1\PM.Extensions.csproj.CoreCompileInputs.cache
-C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Extensions\obj\Debug\netcoreapp2.1\PM.Extensions.AssemblyInfoInputs.cache
-C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Extensions\obj\Debug\netcoreapp2.1\PM.Extensions.AssemblyInfo.cs
-C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Extensions\obj\Debug\netcoreapp2.1\PM.Extensions.dll
-C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Extensions\obj\Debug\netcoreapp2.1\PM.Extensions.pdb
