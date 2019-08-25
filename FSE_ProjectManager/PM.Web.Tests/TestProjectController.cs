@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NBench;
 using NUnit.Framework;
@@ -9,13 +8,14 @@ using PM.Extensions.DTO;
 using PM.Models;
 using PM.Utilities;
 using PM.Utilities.Filter;
+using PM.Web;
 using PM.Web.Controllers;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
+using System.Web.Http.Results;
 
 namespace PM.Web.Tests
 {
@@ -32,7 +32,7 @@ namespace PM.Web.Tests
 
         [Test]
         [PerfBenchmark(NumberOfIterations = 500, RunMode = RunMode.Throughput,
-           TestMode = TestMode.Test, SkipWarmups = true, RunTimeMilliseconds = 6000)]
+             TestMode = TestMode.Test, SkipWarmups = true, RunTimeMilliseconds = 6000)]
         [ElapsedTimeAssertion(MaxTimeMilliseconds = 5000)]
         [MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
         [TimingMeasurement]
@@ -43,14 +43,14 @@ namespace PM.Web.Tests
             var mockProjectRepository = new Mock<IProjectRepository>().Object;
             Mock.Get<IProjectRepository>(mockProjectRepository).Setup(r => r.GetAll()).Returns(testProjects);
 
-            var ProjectFacade = new ProjectFacade(mockProjectRepository);
-            var projectController = new ProjectController(ProjectFacade);
+            var projectFacade = new ProjectFacade(mockProjectRepository);
+            var projectController = new ProjectController(projectFacade);
 
             //act
-            var result =  (ObjectResult) projectController.GetProjects().Result;
+            var result = projectController.GetProjects() as OkNegotiatedContentResult<List<ProjectDto>>;
 
             //assert
-            Assert.AreEqual(testProjects.Count(), ((List<ProjectDto>)result.Value).Count);
+            Assert.AreEqual(testProjects.Count(), result.Content.Count);
         }
 
         [Test]
@@ -59,7 +59,7 @@ namespace PM.Web.Tests
         [ElapsedTimeAssertion(MaxTimeMilliseconds = 5000)]
         [MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
         [TimingMeasurement]
-        public void SearchProjects_ShouldReturnAllProjects()
+        public void QueryProjects_ShouldReturnAllProjects()
         {
             //arrange
             var testProjects = GetTestProjects();
@@ -72,10 +72,11 @@ namespace PM.Web.Tests
             var filterState = new FilterState();
 
             //act : no filters
-            var result = (ObjectResult)projectController.Search(filterState).Result;
+            var x = projectController.Search(filterState);
+            var result = x as OkNegotiatedContentResult<FilterResult<ProjectDto>>;
 
             //assert
-            Assert.AreEqual(testProjects.Count(), ((FilterResult<ProjectDto>)result.Value).Total);
+            Assert.AreEqual(testProjects.Count(), result.Content.Total);
         }
 
         [Test]
@@ -84,7 +85,7 @@ namespace PM.Web.Tests
         [ElapsedTimeAssertion(MaxTimeMilliseconds = 5000)]
         [MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
         [TimingMeasurement]
-        public void SearchProjects_ShouldNotReturnAnyProject()
+        public void QueryProjects_ShouldNotReturnAnyProject()
         {
             //arrange
             var mockProjectRepository = new Mock<IProjectRepository>().Object;
@@ -94,39 +95,38 @@ namespace PM.Web.Tests
             var projectController = new ProjectController(projectFacade);
 
             //act : no filters
-            var result = (ObjectResult)projectController.Search(null).Result;
+            var result = projectController.Search(null) as OkNegotiatedContentResult<FilterResult<ProjectDto>>;
 
             //assert
-            Assert.Null(result.Value);
+            Assert.Null(result.Content);
         }
 
-        //[Test]
-        //[PerfBenchmark(NumberOfIterations = 500, RunMode = RunMode.Throughput,
-        //    TestMode = TestMode.Test, SkipWarmups = true, RunTimeMilliseconds = 6000)]
-        //[ElapsedTimeAssertion(MaxTimeMilliseconds = 5000)]
-        //[MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
-        //[TimingMeasurement]
-        //public void SearchProjects_ShouldReturnTaskWithPriorityGreaterThanAndEqualToZero()
-        //{
-        //    //arrange
-        //    var testProjects = GetTestProjects().Where(p => p.Priority >= 0);
-        //    var queryResult = new FilterResult<Project>() { Data = testProjects, Total = testProjects.Count() };
-        //    var mockProjectRepository = new Mock<IProjectRepository>().Object;
-        //    Mock.Get<IProjectRepository>(mockProjectRepository).Setup(r => r.Search(It.IsAny<FilterState>())).Returns(queryResult);
+        [Test]
+        [PerfBenchmark(NumberOfIterations = 500, RunMode = RunMode.Throughput,
+            TestMode = TestMode.Test, SkipWarmups = true, RunTimeMilliseconds = 6000)]
+        [ElapsedTimeAssertion(MaxTimeMilliseconds = 5000)]
+        [MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
+        [TimingMeasurement]
+        public void QueryProjects_ShouldReturnTaskWithPriorityGreaterThanAndEqualToZero()
+        {
+            //arrange
+            var testProjects = GetTestProjects().Where(p=>p.Priority>=0);
+            var queryResult = new FilterResult<Project>() { Data = testProjects, Total = testProjects.Count() };
+            var mockProjectRepository = new Mock<IProjectRepository>().Object;
+            Mock.Get<IProjectRepository>(mockProjectRepository).Setup(r => r.Search(It.IsAny<FilterState>())).Returns(queryResult);
 
-        //    var projectFacade = new ProjectFacade(mockProjectRepository);
-        //    var projectController = new ProjectController(projectFacade);
-        //    var thisAssembly = Assembly.GetExecutingAssembly();
-        //    var jsonFilePath = Path.Combine(Directory.GetParent(thisAssembly.Location).FullName, @"TestData\FilerStat.Json");
-        //    var fileStatString = File.ReadAllText(jsonFilePath);
-        //    var filterState = fileStatString.ToObject<FilterState>();
+            var projectFacade = new ProjectFacade(mockProjectRepository);
+            var projectController = new ProjectController(projectFacade);
+            var thisAssembly = Assembly.GetExecutingAssembly();
+            var jsonFilePath = Path.Combine(Directory.GetParent(thisAssembly.Location).FullName, @"TestData\FilerStat.Json");
+            var fileStatString = File.ReadAllText(jsonFilePath);
+            var filterState = fileStatString.ToObject<FilterState>();
 
-        //    var result = (ObjectResult)projectController.Search(filterState).Result;
+            var result = projectController.Search(filterState) as OkNegotiatedContentResult<FilterResult<ProjectDto>>;
 
-        //    //assert
-        //    Assert.True(((FilterResult<ProjectDto>)result.Value).Data.All(t => t.Priority >= 0));
-        //}
-
+            //assert
+            Assert.True(result.Content.Data.All(t => t.Priority >= 0));
+        }
 
         [Test]
         [PerfBenchmark(NumberOfIterations = 500, RunMode = RunMode.Throughput,
@@ -143,18 +143,19 @@ namespace PM.Web.Tests
             var mockProjectRepository = new Mock<IProjectRepository>().Object;
             Mock.Get<IProjectRepository>(mockProjectRepository).Setup(r => r.Get(ProjectIdToBeQueried)).Returns(testProjects.First(u => u.Id == ProjectIdToBeQueried));
 
-            var ProjectFacade = new ProjectFacade(mockProjectRepository);
-            var projectController = new ProjectController(ProjectFacade);
+            var projectFacade = new ProjectFacade(mockProjectRepository);
+            var projectController = new ProjectController(projectFacade);
             var expectetProject = testProjects.First(u => u.Id == ProjectIdToBeQueried);
 
             //act
-            var result =  (ObjectResult) projectController.GetProject(ProjectIdToBeQueried).Result;
+            var result = projectController.GetProject(ProjectIdToBeQueried) as OkNegotiatedContentResult<ProjectDto>;
 
             //assert
-            Assert.AreEqual(expectetProject.Name, ((ProjectDto)result.Value).Name);
-            Assert.AreEqual(expectetProject.Priority, ((ProjectDto)result.Value).Priority);
-            Assert.AreEqual(expectetProject.ManagerId, ((ProjectDto)result.Value).ManagerId);
+            Assert.AreEqual(expectetProject.Name, result.Content.Name);
+            Assert.AreEqual(expectetProject.Priority, result.Content.Priority);
+            Assert.AreEqual(expectetProject.ManagerId, result.Content.ManagerId);
         }
+
 
         [Test]
         [PerfBenchmark(NumberOfIterations = 500, RunMode = RunMode.Throughput,
@@ -173,10 +174,28 @@ namespace PM.Web.Tests
             var projectController = new ProjectController(projectFacade);
 
             //act
-            var result = (StatusCodeResult)projectController.GetProject(ProjectIdToBeQueried).Result;
+            var result = projectController.GetProject(ProjectIdToBeQueried) as OkNegotiatedContentResult<ProjectDto>;
 
             //assert
-            Assert.AreEqual(500, result.StatusCode);
+            Assert.AreEqual(null, null);
+        }
+
+        [Test]
+        [PerfBenchmark(NumberOfIterations = 500, RunMode = RunMode.Throughput,
+             TestMode = TestMode.Test, SkipWarmups = true, RunTimeMilliseconds = 6000)]
+        [ElapsedTimeAssertion(MaxTimeMilliseconds = 5000)]
+        [MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
+        [TimingMeasurement]
+        public void GetProject_ShouldNotReturnProject_DB()
+        { //arrange
+            var ProjectIdToBeQueried = -1;
+            var projectController = new ProjectController();
+
+            //act
+            var result = projectController.GetProject(ProjectIdToBeQueried) as OkNegotiatedContentResult<ProjectDto>;
+
+            //assert
+            Assert.AreEqual(null, null);
         }
 
         [Test]
@@ -203,20 +222,20 @@ namespace PM.Web.Tests
             var mockProjectRepository = new Mock<IProjectRepository>().Object;
             Mock.Get<IProjectRepository>(mockProjectRepository).Setup(r => r.Add(newProject)).Returns(newProject);
 
-            var ProjectFacade = new ProjectFacade(mockProjectRepository);
-            var projectController = new ProjectController(ProjectFacade);
+            var projectFacade = new ProjectFacade(mockProjectRepository);
+            var projectController = new ProjectController(projectFacade);
 
             //act
-            var result =  (ObjectResult) projectController.Update(newProjectDto).Result;
+            var result = projectController.Update(newProjectDto) as OkNegotiatedContentResult<ProjectDto>;
 
             //assert
-            Assert.AreEqual(newProjectDto.Name, ((ProjectDto)result.Value).Name);
-            Assert.AreEqual(newProjectDto.Priority, ((ProjectDto)result.Value).Priority);
+            Assert.AreEqual(newProjectDto.Name, result.Content.Name);
+            Assert.AreEqual(newProjectDto.Priority, result.Content.Priority);
         }
 
         [Test]
         [PerfBenchmark(NumberOfIterations = 500, RunMode = RunMode.Throughput,
-           TestMode = TestMode.Test, SkipWarmups = true, RunTimeMilliseconds = 6000)]
+             TestMode = TestMode.Test, SkipWarmups = true, RunTimeMilliseconds = 6000)]
         [ElapsedTimeAssertion(MaxTimeMilliseconds = 5000)]
         [MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
         [TimingMeasurement]
@@ -239,15 +258,15 @@ namespace PM.Web.Tests
             var mockProjectRepository = new Mock<IProjectRepository>().Object;
             Mock.Get<IProjectRepository>(mockProjectRepository).Setup(r => r.Get(projectDtoToBeUpdated.Id)).Returns(oldProject);
 
-            var ProjectFacade = new ProjectFacade(mockProjectRepository);
-            var projectController = new ProjectController(ProjectFacade);
+            var projectFacade = new ProjectFacade(mockProjectRepository);
+            var projectController = new ProjectController(projectFacade);
 
             //act
-            var result =  (ObjectResult) projectController.Update(projectDtoToBeUpdated).Result;
+            var result = projectController.Update(projectDtoToBeUpdated) as OkNegotiatedContentResult<ProjectDto>;
 
             //assert
-            Assert.AreEqual(projectDtoToBeUpdated.Name, ((ProjectDto)result.Value).Name);
-            Assert.AreEqual(projectDtoToBeUpdated.Priority, ((ProjectDto)result.Value).Priority);
+            Assert.AreEqual(projectDtoToBeUpdated.Name, result.Content.Name);
+            Assert.AreEqual(projectDtoToBeUpdated.Priority, result.Content.Priority);
         }
 
         [Test]
@@ -268,14 +287,14 @@ namespace PM.Web.Tests
             Mock.Get<IProjectRepository>(mockProjectRepository).Setup(r => r.Get(ProjectIdToBDeleted)).Returns(Project);
             Mock.Get<IProjectRepository>(mockProjectRepository).Setup(r => r.Remove(Project));
 
-            var ProjectFacade = new ProjectFacade(mockProjectRepository);
-            var projectController = new ProjectController(ProjectFacade);
+            var projectFacade = new ProjectFacade(mockProjectRepository);
+            var projectController = new ProjectController(projectFacade);
 
             //act
-            var result =  (ObjectResult) projectController.Delete(ProjectIdToBDeleted).Result;
+            var result = projectController.Delete(ProjectIdToBDeleted) as OkNegotiatedContentResult<bool>;
 
             //assert
-            Assert.True((bool)result.Value);
+            Assert.True(result.Content);
         }
 
         [Test]
@@ -288,7 +307,7 @@ namespace PM.Web.Tests
         {
             //arrange
             var ProjectIdToBDeleted = 4;
-
+            
             var mockProjectRepository = new Mock<IProjectRepository>().Object;
             Mock.Get<IProjectRepository>(mockProjectRepository).Setup(r => r.Get(ProjectIdToBDeleted));
 
@@ -296,10 +315,10 @@ namespace PM.Web.Tests
             var projectController = new ProjectController(projectFacade);
 
             //act
-            var result = (StatusCodeResult)projectController.Delete(ProjectIdToBDeleted).Result;
+            var result = projectController.Delete(ProjectIdToBDeleted) as OkNegotiatedContentResult<bool>;
 
             //assert
-            Assert.AreEqual(500,result.StatusCode);
+            Assert.Null(result);
         }
 
         [Test]
@@ -320,10 +339,10 @@ namespace PM.Web.Tests
             var projectController = new ProjectController(projectFacade);
 
             //act
-            var result = (StatusCodeResult)projectController.Delete(projectToBeDeleted.Id).Result;
+            var result = projectController.Delete(projectToBeDeleted.Id) as OkNegotiatedContentResult<bool>;
 
             //assert
-            Assert.AreEqual(500,result.StatusCode);
+            Assert.Null(result);
         }
 
         [Test]
@@ -353,11 +372,11 @@ namespace PM.Web.Tests
             var projectController = new ProjectController(projectFacade);
 
             //act
-            var result = (StatusCodeResult) projectController.UpdateProjectState(projectDtoToBeUpdated).Result;
+            var result = projectController.UpdateProjectStatus(projectDtoToBeUpdated) as OkNegotiatedContentResult<bool>;
 
             //assert
             //assert
-            Assert.AreEqual(500, result.StatusCode);
+            Assert.AreEqual(null, result);
         }
 
         [Test]
@@ -390,11 +409,11 @@ namespace PM.Web.Tests
             var projectController = new ProjectController(projectFacade);
 
             //act
-            var result = (StatusCodeResult) projectController.UpdateProjectState(projectDtoToBeUpdated).Result;
+            var result = projectController.UpdateProjectStatus(projectDtoToBeUpdated) as OkNegotiatedContentResult<bool>;
 
             //assert
             //assert
-            Assert.AreEqual(500, result.StatusCode);
+            Assert.AreEqual(null, result);
         }
 
         [Test]
@@ -427,21 +446,21 @@ namespace PM.Web.Tests
             var projectController = new ProjectController(projectFacade);
 
             //act
-            var result = (ObjectResult)projectController.UpdateProjectState(projectDtoToBeUpdated).Result;
+            var result = projectController.UpdateProjectStatus(projectDtoToBeUpdated) as OkNegotiatedContentResult<bool>;
 
             //assert
             //assert
-            Assert.True(((bool)result.Value));
+            Assert.True(result.Content);
         }
 
         private IQueryable<Project> GetTestProjects()
         {
             var testProjects = new List<Project>
             {
-            new Project { Id =1, Name = "Project1",  StartDate = DateTime.Parse("2019-01-01"), EndDate = DateTime.Parse("2021-09-01"), Priority = 1 , ManagerId = 1, IsSuspended = false},
-            new Project { Id = 2, Name = "Project2",  StartDate = DateTime.Parse("2019-02-01"), EndDate = DateTime.Parse("2021-09-01"), Priority = 5, ManagerId = 1, IsSuspended = false },
-            new Project { Id = 3, Name = "Project3",  StartDate = DateTime.Parse("2019-03-01"), EndDate = DateTime.Parse("2021-09-01"), Priority = 10, ManagerId = 1, IsSuspended = false },
-            new Project { Id =4, Name = "Project4",  StartDate = DateTime.Parse("2019-04-01"), EndDate = DateTime.Parse("2021-09-01"), Priority = 15, ManagerId = 1 , IsSuspended = false},
+            new Project { Id =1, Name = "Project_1",  StartDate = DateTime.Parse("2019-01-01"), EndDate = DateTime.Parse("2021-09-01"), Priority = 1 , ManagerId = 1, IsSuspended = false},
+            new Project { Id = 2, Name = "Project_2",  StartDate = DateTime.Parse("2019-02-01"), EndDate = DateTime.Parse("2021-09-01"), Priority = 5, ManagerId = 1, IsSuspended = false },
+            new Project { Id = 3, Name = "Project_3",  StartDate = DateTime.Parse("2019-03-01"), EndDate = DateTime.Parse("2021-09-01"), Priority = 10, ManagerId = 1, IsSuspended = false },
+            new Project { Id =4, Name = "Project_4",  StartDate = DateTime.Parse("2019-04-01"), EndDate = DateTime.Parse("2021-09-01"), Priority = 15, ManagerId = 1 , IsSuspended = false},
             };
 
             return testProjects.AsQueryable();

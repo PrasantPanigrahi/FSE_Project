@@ -1,28 +1,32 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using PM.DAL.Repositories;
+using PM.Extensions;
 using PM.Extensions.DTO;
 using PM.Extensions.Interfaces;
 using PM.Utilities.Filter;
-using System;
 using System.Collections.Generic;
+using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace PM.Web.Controllers
 {
-    [Route("api/task")]
-    [ApiController]
-    public class TaskController : BaseController
+    [RoutePrefix("api/task")]
+    public class TaskController : BaseApiController
     {
         private readonly ITaskFacade _taskFacade;
-
         public TaskController(ITaskFacade taskFacade)
         {
             _taskFacade = taskFacade;
-        }   
+        }
+
+        public TaskController()
+        {
+            _taskFacade = new TaskFacade(new TaskRepository());
+        }
 
         [Route("search")]
         [HttpPost()]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<FilterResult<TaskDto>> Search([FromBody]FilterState filterState)
+        [ResponseType(typeof(List<UserDto>))]
+        public IHttpActionResult Search([FromBody]FilterState filterState)
         {
             return Try(() =>
             {
@@ -31,22 +35,21 @@ namespace PM.Web.Controllers
         }
 
         [Route("getTasks")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ResponseType(typeof(List<TaskDto>))]
         [HttpGet]
         // GET: api/task/getTasks
-        public ActionResult<List<TaskDto>> GetTasks()
+        public IHttpActionResult GetTasks()
         {
             return Try(() =>
             {
                 return Ok(_taskFacade.GetAll());
             });
         }
-
         [Route("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ResponseType(typeof(TaskDto))]
         [HttpGet]
         // GET: api/task/1
-        public ActionResult<TaskDto> GetTask(int id)
+        public IHttpActionResult GetTask(int id)
         {
             return Try(() =>
             {
@@ -55,10 +58,10 @@ namespace PM.Web.Controllers
         }
 
         [Route("update")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ResponseType(typeof(TaskDto))]
         [HttpPost]
         // POST: api/task/update
-        public ActionResult<TaskDto> Update(TaskDto task)
+        public IHttpActionResult Update(TaskDto task)
         {
             return Try(() =>
             {
@@ -67,10 +70,10 @@ namespace PM.Web.Controllers
         }
 
         [Route("delete/{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ResponseType(typeof(bool))]
         [HttpDelete]
         // DELETE: api/task/delete/1
-        public ActionResult<Boolean> Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
             return Try(() =>
             {
@@ -79,10 +82,10 @@ namespace PM.Web.Controllers
         }
 
         [Route("updateTaskStatus")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ResponseType(typeof(bool))]
         [HttpPost()]
         // POST: api/task/updateTaskStatus
-        public ActionResult<bool> UpdateTaskStatus([FromBody] TaskDto task)
+        public IHttpActionResult UpdateTaskStatus([FromBody] TaskDto task)
         {
             return Try(() =>
             {

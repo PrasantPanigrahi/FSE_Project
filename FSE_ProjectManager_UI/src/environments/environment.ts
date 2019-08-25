@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   api: {
-    url: 'http://localhost:10338/'
+    url: 'http://localhost:63204/'
   },
   app: {
     name: 'Project Manager',

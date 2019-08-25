@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using DataAccess.Migrations;
 using PM.Models;
+using System.Data.Entity;
 using System.IO;
 
 namespace PM.DAL
@@ -13,67 +13,37 @@ namespace PM.DAL
         public DbSet<Task> Tasks { get; set; }
         public DbSet<ParentTask> ParentTasks { get; set; }
 
-        public static PMDbContext Create(string connStr= null)
+        public PMDbContext() :
+           base("Fse_PM")
         {
-            if (string.IsNullOrEmpty(connStr)) connStr = GetConnectionString();
-            var optionsBuilder = new DbContextOptionsBuilder<PMDbContext>();
-            optionsBuilder.UseSqlServer(connStr);
-
-            return new PMDbContext(optionsBuilder.Options);
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<PMDbContext, Configuration>());
         }
 
-        private static string GetConnectionString()
+        public static PMDbContext Create()
         {
-            var builder = new ConfigurationBuilder()
-              .SetBasePath(Directory.GetCurrentDirectory())
-              .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-
-            var configuration = builder.Build();
-
-            //set connection string
-            var connectionString = configuration.GetConnectionString("defaultConnection");
-            return connectionString;
+            return new PMDbContext();
         }
 
-        public PMDbContext(DbContextOptions<PMDbContext> options)
-          : base(options)
-        {
-            //run migrations
-            Database.Migrate();
-        }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<User>()
-                .HasKey(s => s.Id);
+                .HasKey<int>(s => s.Id);
 
-            modelBuilder.Entity<User>()
-                .Property(s => s.Id)
-                .UseSqlServerIdentityColumn();
+            modelBuilder.Entity<ParentTask>().HasKey<int>(s => s.Id);
 
-            modelBuilder.Entity<ParentTask>().HasKey(s => s.Id);
-
-            modelBuilder.Entity<Task>()
-                        .HasOne(s => s.ParentTask)
-                        .WithMany(p=>p.Tasks)
-                        .HasForeignKey(t => t.ParentTaskId)
-                        .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Models.Task>()
+                .HasOptional<ParentTask>(s => s.ParentTask)
+                .WithMany(p => p.Tasks)
+                .HasForeignKey<int?>(t => t.ParentTaskId)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Project>()
-                     .HasMany(s => s.Tasks)
-                     .WithOne(p => p.Project)
-                     .HasForeignKey(t => t.ProjectId)
-                     .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Project>()
-                        .HasOne(p => p.Manager)
-                        .WithMany(u => u.Projects)
-                        .HasForeignKey(p => p.ManagerId)
-                        .OnDelete(DeleteBehavior.Cascade);
-
-            //initial data seeding
-            modelBuilder.SeedData();
+              .HasRequired<User>(p => p.Manager)
+              .WithMany(u => u.Projects)
+              .HasForeignKey<int>(p => p.ManagerId)
+              .WillCascadeOnDelete(false);
         }
     }
 }

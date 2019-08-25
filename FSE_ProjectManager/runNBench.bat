@@ -1,1 +1,1 @@
-C:\Users\prapan\.nuget\packages\nbench.runner\1.2.2\tools\netcoreapp2.1\NBench.Runner.exe C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\netcoreapp2.2\PM.Web.Tests.dll  output-directory="C:\Perf" concurrent true
+.\packages\NBench.Runner.1.0.3\lib\net452\NBench.Runner.exe .\PM.Web.Tests\bin\Debug\PM.Web.Tests.dll output-directory="C:\Perf" concurrent true

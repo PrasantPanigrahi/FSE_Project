@@ -1,7 +1,4 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PM.Web.Tests
 {
@@ -12,7 +9,6 @@ namespace PM.Web.Tests
         {
             AutoMapperConfig.Initialize();
         }
-
 
         public void TearDown()
         {

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NBench;
 using NUnit.Framework;
@@ -8,10 +7,12 @@ using PM.Extensions;
 using PM.Extensions.DTO;
 using PM.Models;
 using PM.Utilities.Filter;
+using PM.Web;
 using PM.Web.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Http.Results;
 
 namespace PM.Web.Tests
 {
@@ -28,7 +29,7 @@ namespace PM.Web.Tests
 
         [Test]
         [PerfBenchmark(NumberOfIterations = 500, RunMode = RunMode.Throughput,
-            TestMode = TestMode.Test, SkipWarmups = true, RunTimeMilliseconds = 6000)]
+             TestMode = TestMode.Test, SkipWarmups = true, RunTimeMilliseconds = 6000)]
         [ElapsedTimeAssertion(MaxTimeMilliseconds = 5000)]
         [MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
         [TimingMeasurement]
@@ -43,10 +44,10 @@ namespace PM.Web.Tests
             var taskController = new TaskController(TaskFacade);
 
             //act
-            var result = (ObjectResult)taskController.GetTasks().Result;
+            var result = taskController.GetTasks() as OkNegotiatedContentResult<List<TaskDto>>;
 
             //assert
-            Assert.AreEqual(testTasks.Count(), ((List<TaskDto>)result.Value).Count);
+            Assert.AreEqual(testTasks.Count(), result.Content.Count);
         }
 
         [PerfBenchmark(NumberOfIterations = 500, RunMode = RunMode.Throughput,
@@ -55,23 +56,24 @@ namespace PM.Web.Tests
         [MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
         [TimingMeasurement]
         [Test]
-        public void SearchTasks_ShouldReturnAllProjects()
+        public void QueryTasks_ShouldReturnAllProjects()
         {
             //arrange
             var testProjects = GetTestTasks();
-            var SearchResult = new FilterResult<Task>() { Data = testProjects, Total = testProjects.Count() };
+            var queryResult = new FilterResult<Task>() { Data = testProjects, Total = testProjects.Count() };
             var mockTaskRepository = new Mock<ITaskRepository>().Object;
-            Mock.Get<ITaskRepository>(mockTaskRepository).Setup(r => r.Search(It.IsAny<FilterState>())).Returns(SearchResult);
+            Mock.Get<ITaskRepository>(mockTaskRepository).Setup(r => r.Search(It.IsAny<FilterState>())).Returns(queryResult);
 
             var taskFacade = new TaskFacade(mockTaskRepository);
             var taskController = new TaskController(taskFacade);
             var filterState = new FilterState();
 
             //act : no filters
-            var result = (ObjectResult)taskController.Search(filterState).Result;
+            var x = taskController.Search(filterState);
+            var result = x as OkNegotiatedContentResult<FilterResult<TaskDto>>;
 
             //assert
-            Assert.AreEqual(testProjects.Count(), ((FilterResult<TaskDto>)result.Value).Total);
+            Assert.AreEqual(testProjects.Count(), result.Content.Total);
         }
 
         [Test]
@@ -80,7 +82,7 @@ namespace PM.Web.Tests
         [ElapsedTimeAssertion(MaxTimeMilliseconds = 5000)]
         [MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
         [TimingMeasurement]
-        public void SearchTasks_ShouldNotReturnAnyTask()
+        public void QueryTasks_ShouldNotReturnAnyTask()
         {
             //arrange
             var mockTaskRepository = new Mock<ITaskRepository>().Object;
@@ -91,10 +93,11 @@ namespace PM.Web.Tests
             var filterState = new FilterState();
 
             //act : no filters
-            var result = (ObjectResult)taskController.Search(filterState).Result;
+            var x = taskController.Search(filterState);
+            var result = x as OkNegotiatedContentResult<FilterResult<TaskDto>>;
 
             //assert
-            Assert.AreEqual(null, result.Value);
+            Assert.IsNull(result.Content);
         }
 
         [Test]
@@ -117,11 +120,11 @@ namespace PM.Web.Tests
             var expectetTask = testTasks.First(u => u.Id == TaskIdToBeQueried);
 
             //act
-            var result = (ObjectResult)taskController.GetTask(TaskIdToBeQueried).Result;
+            var result = taskController.GetTask(TaskIdToBeQueried) as OkNegotiatedContentResult<TaskDto>;
 
             //assert
-            Assert.AreEqual(expectetTask.Name, ((TaskDto)result.Value).Name);
-            Assert.AreEqual(expectetTask.Priority, ((TaskDto)result.Value).Priority);
+            Assert.AreEqual(expectetTask.Name, result.Content.Name);
+            Assert.AreEqual(expectetTask.Priority, result.Content.Priority);
         }
 
         [Test]
@@ -142,10 +145,29 @@ namespace PM.Web.Tests
             var taskController = new TaskController(TaskFacade);
 
             //act
-            var result = (StatusCodeResult)taskController.GetTask(TaskIdToBeQueried).Result;
+            var result = taskController.GetTask(TaskIdToBeQueried) as OkNegotiatedContentResult<TaskDto>;
 
             //assert
-            Assert.AreEqual(500, result.StatusCode);
+            Assert.AreEqual(null, result);
+        }
+
+        [Test]
+        [PerfBenchmark(NumberOfIterations = 500, RunMode = RunMode.Throughput,
+            TestMode = TestMode.Test, SkipWarmups = true, RunTimeMilliseconds = 6000)]
+        [ElapsedTimeAssertion(MaxTimeMilliseconds = 5000)]
+        [MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
+        [TimingMeasurement]
+        public void GetTask_ShouldNotReturnTask_DB()
+        {
+            //arrange
+            var TaskIdToBeQueried = -1;
+            var taskController = new TaskController();
+
+            //act
+            var result = taskController.GetTask(TaskIdToBeQueried) as OkNegotiatedContentResult<TaskDto>;
+
+            //assert
+            Assert.AreEqual(null, result);
         }
 
         [Test]
@@ -178,11 +200,11 @@ namespace PM.Web.Tests
             var taskController = new TaskController(TaskFacade);
 
             //act
-            var result = (ObjectResult)taskController.Update(newTaskDto).Result;
+            var result = taskController.Update(newTaskDto) as OkNegotiatedContentResult<TaskDto>;
 
             //assert
-            Assert.AreEqual(newTaskDto.Name, ((TaskDto)result.Value).Name);
-            Assert.AreEqual(newTaskDto.Priority, ((TaskDto)result.Value).Priority);
+            Assert.AreEqual(newTaskDto.Name, result.Content.Name);
+            Assert.AreEqual(newTaskDto.Priority, result.Content.Priority);
         }
 
         [Test]
@@ -216,11 +238,11 @@ namespace PM.Web.Tests
             var taskController = new TaskController(TaskFacade);
 
             //act
-            var result = (ObjectResult)taskController.Update(TaskDtoToBeUpdated).Result;
+            var result = taskController.Update(TaskDtoToBeUpdated) as OkNegotiatedContentResult<TaskDto>;
 
             //assert
-            Assert.AreEqual(TaskDtoToBeUpdated.Name, ((TaskDto)result.Value).Name);
-            Assert.AreEqual(TaskDtoToBeUpdated.Priority, ((TaskDto)result.Value).Priority);
+            Assert.AreEqual(TaskDtoToBeUpdated.Name, result.Content.Name);
+            Assert.AreEqual(TaskDtoToBeUpdated.Priority, result.Content.Priority);
         }
 
         [Test]
@@ -245,10 +267,10 @@ namespace PM.Web.Tests
             var taskController = new TaskController(TaskFacade);
 
             //act
-            var result = (ObjectResult)taskController.Delete(TaskIdToBDeleted).Result;
+            var result = taskController.Delete(TaskIdToBDeleted) as OkNegotiatedContentResult<bool>;
 
             //assert
-            Assert.True(((bool)result.Value));
+            Assert.True(result.Content);
         }
 
         [Test]
@@ -269,10 +291,10 @@ namespace PM.Web.Tests
             var taskController = new TaskController(TaskFacade);
 
             //act
-            var result = (StatusCodeResult)taskController.Delete(TaskIdToBDeleted).Result;
+            var result = taskController.Delete(TaskIdToBDeleted) as OkNegotiatedContentResult<bool>;
 
             //assert
-            Assert.AreEqual(500, result.StatusCode);
+            Assert.IsNull(result);
         }
 
         [Test]
@@ -303,10 +325,10 @@ namespace PM.Web.Tests
             var taskController = new TaskController(TaskFacade);
 
             //act
-            var result = (StatusCodeResult)taskController.UpdateTaskStatus(TaskDtoToBeUpdated).Result;
+            var result = taskController.UpdateTaskStatus(TaskDtoToBeUpdated) as OkNegotiatedContentResult<bool>;
 
             //assert
-            Assert.AreEqual(500, result.StatusCode);
+            Assert.AreEqual(null, result);
         }
 
         [Test]
@@ -341,10 +363,10 @@ namespace PM.Web.Tests
             var taskController = new TaskController(TaskFacade);
 
             //act
-            var result = (StatusCodeResult)taskController.UpdateTaskStatus(TaskDtoToBeUpdated).Result;
+            var result = taskController.UpdateTaskStatus(TaskDtoToBeUpdated) as OkNegotiatedContentResult<bool>;
 
             //assert
-            Assert.AreEqual(500, result.StatusCode);
+            Assert.AreEqual(null, result);
         }
 
         [Test]
@@ -379,20 +401,20 @@ namespace PM.Web.Tests
             var taskController = new TaskController(TaskFacade);
 
             //act
-            var result = (ObjectResult)taskController.UpdateTaskStatus(TaskDtoToBeUpdated).Result;
+            var result = taskController.UpdateTaskStatus(TaskDtoToBeUpdated) as OkNegotiatedContentResult<bool>;
 
             //assert
-            Assert.True(((bool)result.Value));
+            Assert.True(result.Content);
         }
 
         private IQueryable<Task> GetTestTasks()
         {
             var testTasks = new List<Task>
             {
-             new Task { Id = 1, Name = "Task1",  StartDate = DateTime.Parse("2019-01-01"), EndDate = DateTime.Parse("2021-09-01"), Priority = 1 , OwnerId = 2, ProjectId = 1, ParentTaskId = 1, StatusId = 2},
-            new Task { Id = 2, Name = "Task2",  StartDate = DateTime.Parse("2019-02-01"), EndDate = DateTime.Parse("2021-09-01"), Priority = 2 , OwnerId = 2, ProjectId = 2, ParentTaskId = 1, StatusId = 2},
-            new Task { Id = 2, Name = "Task3",  StartDate = DateTime.Parse("2019-03-01"), EndDate = DateTime.Parse("2021-09-01"), Priority = 3 , OwnerId = 3, ProjectId = 3, ParentTaskId = 1, StatusId = 2 },
-            new Task { Id = 4, Name = "Task4",  StartDate = DateTime.Parse("2019-04-01"), EndDate = DateTime.Parse("2021-09-01"), Priority = 4 , OwnerId = 4, ProjectId = 4, ParentTaskId = 1, StatusId = 2 },
+             new Task { Id = 1, Name = "Task_1",  StartDate = DateTime.Parse("2019-01-01"), EndDate = DateTime.Parse("2021-09-01"), Priority = 1 , OwnerId = 2, ProjectId = 1, ParentTaskId = 1, StatusId = 2},
+            new Task { Id = 2, Name = "Task_2",  StartDate = DateTime.Parse("2019-02-01"), EndDate = DateTime.Parse("2021-09-01"), Priority = 2 , OwnerId = 2, ProjectId = 2, ParentTaskId = 1, StatusId = 2},
+            new Task { Id = 2, Name = "Task_3",  StartDate = DateTime.Parse("2019-03-01"), EndDate = DateTime.Parse("2021-09-01"), Priority = 3 , OwnerId = 3, ProjectId = 3, ParentTaskId = 1, StatusId = 2 },
+            new Task { Id = 4, Name = "Task_4",  StartDate = DateTime.Parse("2019-04-01"), EndDate = DateTime.Parse("2021-09-01"), Priority = 4 , OwnerId = 4, ProjectId = 4, ParentTaskId = 1, StatusId = 2 },
             };
 
             return testTasks.AsQueryable();

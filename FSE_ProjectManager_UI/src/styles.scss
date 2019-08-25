@@ -31,6 +31,9 @@
 //   background: red;
 // }
 
+
+  
+
 .content-section {
   display: block;
   padding: 30px;
@@ -55,7 +58,10 @@ th
 {
     background-color:slategrey!important;
     color: #f8f9fa !important;
+    font-size: 18px !important;
 }
+
+ul.navbar-nav a:hover { color:chartreuse !important; }
 
 
 

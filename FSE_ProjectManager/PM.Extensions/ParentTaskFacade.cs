@@ -3,8 +3,6 @@ using PM.DAL.Repositories.Interface;
 using PM.Extensions.DTO;
 using PM.Extensions.Interfaces;
 using PM.Models;
-using PM.Utilities;
-using PM.Utilities.Filter;
 using System;
 using System.Collections.Generic;
 using System.Linq;

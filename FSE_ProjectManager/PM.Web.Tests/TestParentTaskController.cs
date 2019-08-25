@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NBench;
 using NUnit.Framework;
@@ -8,10 +7,9 @@ using PM.Extensions;
 using PM.Extensions.DTO;
 using PM.Models;
 using PM.Web.Controllers;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Web.Http.Results;
 
 namespace PM.Web.Tests
 {
@@ -43,20 +41,19 @@ namespace PM.Web.Tests
             var taskController = new ParentTaskController(taskFacade);
 
             //act
-            var objResult = (ObjectResult)taskController.GetTasks().Result;
-            var result = objResult.Value as List<ParentTaskDto>;           
+            var result = taskController.GetTasks() as OkNegotiatedContentResult<List<ParentTaskDto>>;
 
             //assert
-            Assert.AreEqual(testTasks.Count(), result.Count);
+            Assert.AreEqual(testTasks.Count(), result.Content.Count);
         }
 
         [Test]
         [PerfBenchmark(NumberOfIterations = 500, RunMode = RunMode.Throughput,
-            TestMode = TestMode.Test, SkipWarmups = true, RunTimeMilliseconds = 6000)]
+             TestMode = TestMode.Test, SkipWarmups = true, RunTimeMilliseconds = 6000)]
         [ElapsedTimeAssertion(MaxTimeMilliseconds = 5000)]
         [MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
         [TimingMeasurement]
-        public void GetparentTask_ShouldReturnCorrectParentTask()
+        public void GetparentTask_ShouldReturnCorrectparentTask()
         {
             //arrange
             var taskIdToBeQueried = 1;
@@ -70,20 +67,19 @@ namespace PM.Web.Tests
             var expectetparentTask = testTasks.First(u => u.Id == taskIdToBeQueried);
 
             //act
-            var result = (ObjectResult)taskController.GetTask(taskIdToBeQueried).Result;
+            var result = taskController.GetTask(taskIdToBeQueried) as OkNegotiatedContentResult<ParentTaskDto>;
 
             //assert
-            Assert.AreEqual(expectetparentTask.Name, ((ParentTaskDto)result.Value).Name);
+            Assert.AreEqual(expectetparentTask.Name, result.Content.Name);
         }
-
 
         [Test]
         [PerfBenchmark(NumberOfIterations = 500, RunMode = RunMode.Throughput,
-             TestMode = TestMode.Test, SkipWarmups = true, RunTimeMilliseconds = 6000)]
+              TestMode = TestMode.Test, SkipWarmups = true, RunTimeMilliseconds = 6000)]
         [ElapsedTimeAssertion(MaxTimeMilliseconds = 5000)]
         [MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
         [TimingMeasurement]
-        public void GetParentTask_ShouldNotReturnTask()
+        public void GetparentTask_ShouldNotReturnTask()
         {
             //arrange
             var taskIdToBeQueried = 1000;
@@ -95,31 +91,30 @@ namespace PM.Web.Tests
             var taskController = new ParentTaskController(taskFacade);
 
             //act
-            var result = (StatusCodeResult)taskController.GetTask(taskIdToBeQueried).Result;
+            var result = taskController.GetTask(taskIdToBeQueried) as OkNegotiatedContentResult<ParentTaskDto>;
 
             //assert
-            Assert.AreEqual(result.StatusCode, 500);
+            Assert.AreEqual(result, null);
         }
 
-        //[Test]
-        //[PerfBenchmark(NumberOfIterations = 500, RunMode = RunMode.Throughput,
-        //     TestMode = TestMode.Test, SkipWarmups = true, RunTimeMilliseconds = 6000)]
-        //[ElapsedTimeAssertion(MaxTimeMilliseconds = 5000)]
-        //[MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
-        //[TimingMeasurement]
-        //public void GetparentTask_ShouldNotReturnTask_DB()
-        //{
-        //    //arrange
-        //    var taskIdToBeQueried = -1;
-        //    var taskController = new ParentTaskController();
+        [Test]
+        [PerfBenchmark(NumberOfIterations = 500, RunMode = RunMode.Throughput,
+             TestMode = TestMode.Test, SkipWarmups = true, RunTimeMilliseconds = 6000)]
+        [ElapsedTimeAssertion(MaxTimeMilliseconds = 5000)]
+        [MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
+        [TimingMeasurement]
+        public void GetparentTask_ShouldNotReturnTask_DB()
+        {
+            //arrange
+            var taskIdToBeQueried = -1;
+            var taskController = new ParentTaskController();
 
-        //    //act
-        //    var result = (ObjectResult)taskController.GetTask(taskIdToBeQueried).Result;
+            //act
+            var result = taskController.GetTask(taskIdToBeQueried) as OkNegotiatedContentResult<ParentTaskDto>;
 
-        //    //assert
-        //    Assert.AreEqual(result, null);
-        //}
-
+            //assert
+            Assert.AreEqual(result, null);
+        }
 
         [Test]
         [PerfBenchmark(NumberOfIterations = 500, RunMode = RunMode.Throughput,
@@ -144,10 +139,10 @@ namespace PM.Web.Tests
             var taskController = new ParentTaskController(taskFacade);
 
             //act
-            var result = (ObjectResult)taskController.Update(newTaskDto).Result;
+            var result = taskController.Update(newTaskDto) as OkNegotiatedContentResult<ParentTaskDto>;
 
             //assert
-            Assert.AreEqual(newTaskDto.Name, ((ParentTaskDto)result.Value).Name);
+            Assert.AreEqual(newTaskDto.Name, result.Content.Name);
         }
 
         [Test]
@@ -175,19 +170,18 @@ namespace PM.Web.Tests
             var taskController = new ParentTaskController(taskFacade);
 
             //act
-            var result = (ObjectResult)taskController.Update(parentTaskDtoToBeUpdated).Result;
+            var result = taskController.Update(parentTaskDtoToBeUpdated) as OkNegotiatedContentResult<ParentTaskDto>;
 
             //assert
-            Assert.AreEqual(parentTaskDtoToBeUpdated.Name, ((ParentTaskDto)result.Value).Name);
+            Assert.AreEqual(parentTaskDtoToBeUpdated.Name, result.Content.Name);
         }
-
 
         private IQueryable<ParentTask> GetTestTasks()
         {
             var parentTask = new List<ParentTask>
             {
-            new ParentTask { Id =1, Name = "ParentTask1"},
-            new ParentTask { Id =2, Name = "parentTask2" },
+            new ParentTask { Id =1, Name = "ParentTask_1"},
+            new ParentTask { Id =2, Name = "parentTask_2" },
             };
             return parentTask.AsQueryable();
         }

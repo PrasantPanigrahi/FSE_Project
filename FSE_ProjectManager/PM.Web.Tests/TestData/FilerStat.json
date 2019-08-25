@@ -1,0 +1,21 @@
+{
+  "skip": 0,
+  "take": 15,
+  "filter": {
+    "logic": "and",
+    "filters": [
+      {
+        "field": "priority",
+        "value": 0,
+        "operator": "gte"
+      }
+    ]
+  },
+  "sort": [
+    {
+      "field": "id",
+      "dir": "desc"
+    }
+  ],
+  "timeZoneOffset": 480
+}

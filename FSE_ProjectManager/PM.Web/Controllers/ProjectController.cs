@@ -1,28 +1,31 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using PM.DAL.Repositories;
+using PM.Extensions;
 using PM.Extensions.DTO;
 using PM.Extensions.Interfaces;
 using PM.Utilities.Filter;
 using System.Collections.Generic;
-using System.Net;
+using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace PM.Web.Controllers
 {
-    [Route("api/project")]
-    [ApiController]
-    public class ProjectController : BaseController
+    [RoutePrefix("api/project")]
+    public class ProjectController : BaseApiController
     {
         private readonly IProjectFacade _projectFacade;
-
         public ProjectController(IProjectFacade projectFacade)
         {
             _projectFacade = projectFacade;
         }
-
+        public ProjectController()
+        {
+            _projectFacade = new ProjectFacade(new ProjectRepository());
+        }
 
         [Route("search")]
         [HttpPost()]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
-        public ActionResult<FilterResult<ProjectDto>> Search([FromBody]FilterState filterState)
+        [ResponseType(typeof(List<ProjectDto>))]
+        public IHttpActionResult Search([FromBody]FilterState filterState)
         {
             return Try(() =>
             {
@@ -31,10 +34,10 @@ namespace PM.Web.Controllers
         }
 
         [Route("getProjects")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ResponseType(typeof(List<ProjectDto>))]
         [HttpGet]
         // GET: api/project/getProjects
-        public ActionResult<List<ProjectDto>> GetProjects()
+        public IHttpActionResult GetProjects()
         {
             return Try(() =>
             {
@@ -43,10 +46,10 @@ namespace PM.Web.Controllers
         }
 
         [Route("{id}")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ResponseType(typeof(ProjectDto))]
         [HttpGet]
         // GET: api/project/5
-        public ActionResult<ProjectDto> GetProject(int id)
+        public IHttpActionResult GetProject(int id)
         {
             return Try(() =>
             {
@@ -55,10 +58,10 @@ namespace PM.Web.Controllers
         }
 
         [Route("updateProjectStatus")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ResponseType(typeof(bool))]
         [HttpPost()]
-        // POST: api/project/suspend/?id=1
-        public ActionResult<ProjectDto> UpdateProjectState(ProjectDto project)
+        // POST: api/project/suspend/?id=10
+        public IHttpActionResult UpdateProjectStatus(ProjectDto project)
         {
             return Try(() =>
             {
@@ -67,10 +70,10 @@ namespace PM.Web.Controllers
         }
 
         [Route("update")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ResponseType(typeof(ProjectDto))]
         [HttpPost]
         // POST: api/project/update
-        public ActionResult<ProjectDto> Update(ProjectDto project)
+        public IHttpActionResult Update(ProjectDto project)
         {
             return Try(() =>
             {
@@ -79,16 +82,15 @@ namespace PM.Web.Controllers
         }
 
         [Route("delete/{id}")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ResponseType(typeof(bool))]
         [HttpDelete]
-        // DELETE: api/project/1
-        public ActionResult<bool> Delete(int id)
+        // DELETE: api/project/5
+        public IHttpActionResult Delete(int id)
         {
             return Try(() =>
             {
                 return Ok(_projectFacade.Delete(id));
             });
         }
-
     }
 }

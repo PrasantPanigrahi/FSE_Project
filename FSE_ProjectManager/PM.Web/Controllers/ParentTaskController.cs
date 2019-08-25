@@ -1,27 +1,33 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using PM.DAL.Repositories;
+using PM.Extensions;
 using PM.Extensions.DTO;
 using PM.Extensions.Interfaces;
 using System.Collections.Generic;
-using System.Net;
+using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace PM.Web.Controllers
 {
-    [Route("api/parentTask")]
-    [ApiController]
-    public class ParentTaskController : BaseController
+    [RoutePrefix("api/parentTask")]
+    public class ParentTaskController : BaseApiController
     {
         private readonly IParentTaskFacade _taskFacade;
 
         public ParentTaskController(IParentTaskFacade taskFacade)
         {
             _taskFacade = taskFacade;
-        }             
+        }
+
+        public ParentTaskController()
+        {
+            _taskFacade = new ParentTaskFacade(new ParentTaskRepository());
+        }
 
         [Route("getTasks")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ResponseType(typeof(List<ParentTaskDto>))]
         [HttpGet]
         // GET: api/parentTask/getTasks
-        public ActionResult<List<ParentTaskDto>> GetTasks()
+        public IHttpActionResult GetTasks()
         {
             return Try(() =>
             {
@@ -30,10 +36,10 @@ namespace PM.Web.Controllers
         }
 
         [Route("{id}")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ResponseType(typeof(ParentTaskDto))]
         [HttpGet]
-        // GET: api/parentTask/1
-        public ActionResult<ParentTaskDto> GetTask(int id)
+        // GET: api/parentTask/5
+        public IHttpActionResult GetTask(int id)
         {
             return Try(() =>
             {
@@ -42,10 +48,10 @@ namespace PM.Web.Controllers
         }
 
         [Route("update")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ResponseType(typeof(ParentTaskDto))]
         [HttpPost]
         // POST: api/parentTask/update
-        public ActionResult<ParentTaskDto> Update(ParentTaskDto task)
+        public IHttpActionResult Update(ParentTaskDto task)
         {
             return Try(() =>
             {

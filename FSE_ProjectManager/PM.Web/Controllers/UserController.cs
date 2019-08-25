@@ -1,27 +1,31 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using PM.DAL.Repositories;
+using PM.Extensions;
 using PM.Extensions.DTO;
 using PM.Extensions.Interfaces;
 using PM.Utilities.Filter;
 using System.Collections.Generic;
-using System.Net;
+using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace PM.Web.Controllers
 {
-    [Route("api/user")]
-    [ApiController]
-    public class UserController : BaseController
+    [RoutePrefix("api/user")]
+    public class UserController : BaseApiController
     {
         private readonly IUserFacade _userFacade;
-
         public UserController(IUserFacade userFacade)
         {
             _userFacade = userFacade;
         }
+        public UserController()
+        {
+            _userFacade = new UserFacade(new PM.DAL.Repositories.UserRepository());
+        }
 
         [Route("search")]
         [HttpPost()]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
-        public ActionResult<FilterResult<UserDto>> Search([FromBody]FilterState filterState)
+        [ResponseType(typeof(List<UserDto>))]
+        public IHttpActionResult Search([FromBody]FilterState filterState)
         {
             return Try(() =>
             {
@@ -30,10 +34,10 @@ namespace PM.Web.Controllers
         }
 
         [Route("getUserList")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ResponseType(typeof(List<UserDto>))]
         [HttpGet]
         // GET: api/users/getUserList
-        public ActionResult<List<UserDto>> GetUserList()
+        public IHttpActionResult GetUsers()
         {
             return Try(() =>
             {
@@ -41,11 +45,12 @@ namespace PM.Web.Controllers
             });
         }
 
+        
         [Route("{id}")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ResponseType(typeof(UserDto))]
         [HttpGet]
         // GET: api/user/1
-        public ActionResult<UserDto> GetUser(int id)
+        public IHttpActionResult GetUser(int id)
         {
             return Try(() =>
             {
@@ -54,10 +59,10 @@ namespace PM.Web.Controllers
         }
 
         [Route("update")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ResponseType(typeof(UserDto))]
         [HttpPost]
         // POST: api/user/update
-        public ActionResult<UserDto> Update(UserDto user)
+        public IHttpActionResult Update(UserDto user)
         {
             return Try(() =>
             {
@@ -66,10 +71,10 @@ namespace PM.Web.Controllers
         }
 
         [Route("delete/{id}")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ResponseType(typeof(bool))]
         [HttpDelete]
-        // DELETE: api/user/5
-        public ActionResult<bool> Delete(int id)
+        // DELETE: api/user/1
+        public IHttpActionResult Delete(int id)
         {
             return Try(() =>
             {
