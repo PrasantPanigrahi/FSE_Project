@@ -14,7 +14,7 @@ REM   http://www.allenconway.net/2015/06/using-opencover-and-reportgenerator-to.
 REM  Andrew Newton - 
 REM   http://www.nootn.com.au/2014/01/code-coverage-with-opencover-example.html#.VxiNn_krLDc
 
-SET DllContainingTests=%~dp0PM.Web.Tests\bin\Debug\Web.Api.Tests.dll
+SET DllContainingTests=%~dp0PM.Web.Tests\bin\Debug\PM.Web.Tests.dll
 
 
 REM *** IMPORTANT - Change DllContainingTests variable (above) to point to the DLL 

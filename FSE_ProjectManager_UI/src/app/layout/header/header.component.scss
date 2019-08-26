@@ -1,6 +1,7 @@
 .navbar-brand{
     font-size: 2.25rem;
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: White!important;
 }
 
 .nav-link
@@ -8,3 +9,39 @@
     font-size: 20px;
     color: White!important;
 }
+
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 20px;    
+  }
+  
+  li a:hover:not(.active) {
+    // background-color: #111;
+       background-color:#007ad9;
+       color: wheat;
+  }
+  
+  li a:active,li.open  {
+    background-color: #007ad9;  
+  }
+
+
+
+

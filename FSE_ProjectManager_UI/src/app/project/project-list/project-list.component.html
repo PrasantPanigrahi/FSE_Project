@@ -1,4 +1,4 @@
-<div class="content-heading">Projects</div>
+<div class="content-heading" style="background-color: lightcyan;">Projects</div>
 <div class="d-flex justify-content-between">
   <div style="margin-bottom: 10px">
     <button pButton type="submit" label="Add New" style="margin-right: .25em" (click)="addNewProject()"></button>
@@ -11,7 +11,7 @@
   [style]="{'width':'100%'}" scrollHeight="250px">
   <ng-template pTemplate="header" let-columns>
     <tr>
-      <th style="width:8em"></th>
+      <th style="width:8em;height:50px;"></th>
       <th *ngFor="let col of columns" [pSortableColumn]="col.field">
         {{col.header}}
         <p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
@@ -20,8 +20,8 @@
       </th>
     </tr>
     <tr>
-      <th style="width:8em"></th>
-      <th *ngFor="let col of columns" [ngSwitch]="col.field" [ngSwitch]="col.field">
+      <th style="width:8em;background-color:lightgray!important;"></th>
+      <th *ngFor="let col of columns" [ngSwitch]="col.field" [ngSwitch]="col.field" style="color:blue!important;;background-color:lightgray!important;">
         <div *ngSwitchCase="'priority'">
           Value>= {{priorityFilter}}
           <i *ngIf="priorityFilter" class="fa fa-close"

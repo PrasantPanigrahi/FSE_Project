@@ -1,4 +1,4 @@
-<div class="content-heading">Users</div>
+<div class="content-heading" style="background-color: lightcyan;">Users</div>
 <div class="d-flex justify-content-between">
   <div style="margin-bottom: 10px">
     <button pButton type="submit" label="Add New" style="margin-right: .25em" (click)="addNewUser()"></button>
@@ -11,7 +11,7 @@
   scrollHeight="250px" >
   <ng-template pTemplate="header" let-columns >   
     <tr >      
-      <th style="width:8em"></th>
+      <th style="width:8em; height:50px;"></th>
       <th *ngFor="let col of columns" [pSortableColumn]="col.field">
         {{col.header}}
         <p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
@@ -21,8 +21,8 @@
     </tr> 
      
     <tr>
-      <th style="width:8em"></th>
-      <th *ngFor="let col of columns" [ngSwitch]="col.field">
+      <th style="width:8em;background-color:lightgray!important;"></th>
+      <th *ngFor="let col of columns" [ngSwitch]="col.field" style="background-color:lightgray!important;" >
         <input pInputText type="text" (keyup)="filterListHelper.onKeyup($event.target.value, col.field)"
           style="width: 100%">
       </th>

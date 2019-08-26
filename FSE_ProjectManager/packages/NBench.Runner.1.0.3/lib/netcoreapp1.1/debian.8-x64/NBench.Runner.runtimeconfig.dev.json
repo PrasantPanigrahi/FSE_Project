@@ -1,7 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "C:\\Windows\\system32\\config\\systemprofile\\.nuget\\packages"
-    ]
-  }
-}
