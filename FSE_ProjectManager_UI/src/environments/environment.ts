@@ -5,12 +5,13 @@
 export const environment = {
   production: false,
   api: {
-    url: 'http://localhost:63204/'
+    //url: 'http://localhost:63204/'
+	url: 'http://localhost/ProjectManagerAPI/'
   },
   app: {
     name: 'Project Manager',
     description: 'DEV- Project Manager',
-    year: ((new Date()).getFullYear())
+    year: ((new Date()).getFullYear()) 
   }
 };
 

@@ -19,7 +19,7 @@ import { TaskService } from '../../task/task.service';
 })
 export class TaskListComponent implements FilterList, OnInit, OnDestroy {
   tasks: Task[];
-  selectedProject: Task;
+  selectedTask: Task;
   cols: any[];
   private subscription: Subscription;
   totalRecords = 0;

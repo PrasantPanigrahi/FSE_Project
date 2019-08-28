@@ -14,7 +14,7 @@ namespace PM.DAL
         public DbSet<ParentTask> ParentTasks { get; set; }
 
         public PMDbContext() :
-           base("Fse_PM")
+           base("ConnectionString")
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<PMDbContext, Configuration>());
         }
