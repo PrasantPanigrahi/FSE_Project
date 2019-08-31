@@ -20,6 +20,7 @@ namespace PM.Web
                     })
                 .EnableSwaggerUi(c =>
                     {
+                        //c.DocumentTitle("Project Manager - Swagger UI");
                     });
         }
     }

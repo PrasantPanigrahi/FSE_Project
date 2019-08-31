@@ -20,7 +20,7 @@ describe('Component: Sidebar', () => {
         }).compileComponents();
     });
 
-    it('should create an instance', async(inject([MenuService, SettingsService, Router], (menuService, settingsService, router) => {
+    xit('should create an instance', async(inject([MenuService, SettingsService, Router], (menuService, settingsService, router) => {
         let component = new SidebarComponent(menuService, settingsService, router);
         expect(component).toBeTruthy();
     })));

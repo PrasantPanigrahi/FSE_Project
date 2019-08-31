@@ -7,7 +7,7 @@ describe('LayoutModule', () => {
     layoutModule = new LayoutModule();
   });
 
-  it('should create an instance', () => {
+  xit('should create an instance', () => {
     expect(layoutModule).toBeTruthy();
   });
 });
