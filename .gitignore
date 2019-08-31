@@ -25,3 +25,5 @@
 /FSE_ProjectManager/PM.Extensions/bin/Debug/netcoreapp2.2
 /FSE_ProjectManager/PM.Web.Tests/bin/Debug/netcoreapp2.2
 /FSE_ProjectManager/PM.Extensions/bin/Debug
+/FSE_ProjectManager/packages
+/Logs/log20190828.txt

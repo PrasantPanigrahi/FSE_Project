@@ -25,7 +25,7 @@
         <div *ngSwitchCase="'priority'">
           Value>= {{priorityFilter}}
           <i *ngIf="priorityFilter" class="fa fa-close"
-            (click)="priorityFilter=null;filterListHelper.onKeyup(0, 'priority','gte')" style="cursor:pointer"></i>
+            (click)="priorityFilter=null;filterListHelper.onKeyup('0', 'priority','gte')" style="cursor:pointer"></i>
           <p-slider [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="priorityFilter" [min]="0" [max]="10"
             (onChange)="filterListHelper.onKeyup(priorityFilter, 'priority','gte')">
           </p-slider>
