@@ -10,7 +10,7 @@
               <div class="ui-g-12 ui-md-3"><label for="firstName"><strong>First Name</strong>
                   <strong style="color: red">*</strong></label></div>
               <div class="ui-g-12 ui-md-9">
-                <input formControlName="firstName" name="firstName" id="ud_firstName" type="text" size="40" pInputText
+                <input formControlName="firstName" class="firstName" name="firstName" id="ud_firstName" type="text" size="40" pInputText
                   maxlength=200 placeholder="- First Name -" appValidateName>
                 <div class="text-danger" *ngIf="!validateName()"><em>Either First Name or Last name is required.</em>
                 </div>
@@ -46,7 +46,7 @@
       <p-footer>
         <button [disabled]="userForm.invalid" pButton type="submit" label="Save" icon="pi pi-check"
           style="margin-right: .25em"></button>
-        <button pButton type="button" label="Back" icon="pi pi-times" class="ui-button-danger"
+        <button pButton type="button" label="Back" icon="pi pi-times" class="ui-button-danger" id="btnCancel"
           (click)="back()"></button>
       </p-footer>
 

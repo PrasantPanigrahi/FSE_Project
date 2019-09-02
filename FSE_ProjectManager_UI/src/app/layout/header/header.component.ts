@@ -1,7 +1,6 @@
 import { DialogService } from 'primeng/api';
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-
 import { MenuService } from '../../core/menu/menu.service';
 import { SettingsService } from '../../core/settings/settings.service';
 
