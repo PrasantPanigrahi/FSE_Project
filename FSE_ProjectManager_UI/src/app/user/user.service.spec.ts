@@ -11,21 +11,6 @@ import {  HttpClientModule } from '@angular/common/http';
 import { appSettings } from 'src/app-settings';
 import { environment } from 'src/environments/environment';
 
-// describe('UserService', () => {
-//   //beforeEach(() => TestBed.configureTestingModule({}));  
-//   beforeEach(() => TestBed.configureTestingModule({
-//     imports: [FormsModule,ReactiveFormsModule, RouterTestingModule,HttpClientModule],    
-//     providers: [UserService]
- 
-//   }));
-
-
-//   it('should be created', () => {
-//     const service: UserService = TestBed.get(UserService);
-//     expect(service).toBeTruthy();
-//   });
-// });
-
 describe('UserService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [HttpClientModule,HttpClientTestingModule],

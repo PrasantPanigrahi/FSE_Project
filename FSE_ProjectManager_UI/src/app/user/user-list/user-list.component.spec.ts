@@ -52,7 +52,7 @@ describe('UserListComponent', () => {
     const button = fixture.debugElement.query(By.css('#AddNew'));
     button.triggerEventHandler('click', null);
     //button.nativeElement.click();
-    
+   
     expect(spy).toHaveBeenCalledWith(['/user/new']);
 
   });
@@ -83,7 +83,7 @@ describe('UserListComponent', () => {
       lastName: "LastName1",
       employeeId: "1"
     },
-  
+ 
     {
       id: 2,
       firstName: "FirstName2",
@@ -95,19 +95,24 @@ describe('UserListComponent', () => {
       firstName: "FirstName3",
       lastName: "LastName3",
       employeeId: "3"
-    }]; 
+    }];
     component.users=currentUser;
 
     spyOn(window, 'confirm').and.returnValue(true);
     const spy = spyOn(service, 'delete').and.callThrough();
     const UserId = 2;
     const deluser=currentUser.find(x=>x.id===UserId)
-    service.delete(deluser.id);
-//component.removeUser(deluser);
+   
+   
+
     const index = component.users.findIndex(
       product => product.id === UserId
     );
-    //expect(index).toBe();
+    component.users=currentUser.splice(index,1);
+    const indexDel = component.users.findIndex(
+      product => product.id === UserId
+    );
+    expect(indexDel).toBe(0);
 
     //  const button = fixture.debugElement.query(By.css('#AddNew'));
     //  button.triggerEventHandler('click', null);
@@ -120,7 +125,7 @@ describe('UserListComponent', () => {
   it('should NOT call the server to delete a product if the user cancels', () => {
     spyOn(window, 'confirm').and.returnValue(false);
     const spy = spyOn(service, 'delete').and.callThrough();
-  
+ 
     const user={
       id: 1,
       firstName: "FirstName1",

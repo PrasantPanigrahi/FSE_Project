@@ -1,8 +1,11 @@
+
 import { NameValidatorDirective } from './name-validator.directive';
 
 describe('NameValidatorDirective', () => {
-  xit('should create an instance', () => {
-    const directive = new NameValidatorDirective();
+  const directive = new NameValidatorDirective(); 
+
+  it('should  create NameValidatorDirective', () => {
     expect(directive).toBeTruthy();
   });
+
 });

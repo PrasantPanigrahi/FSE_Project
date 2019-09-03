@@ -15,7 +15,7 @@ describe('Component: Header', () => {
            //imports: [FormsModule,ReactiveFormsModule, RouterTestingModule,HttpClientModule],    
            //providers: [MenuService,  SettingsService]
            //providers: [ SettingsService]
-        });//.compileComponents();
+        }).compileComponents();
     });
 
     //it('should create an instance', async(inject([MenuService,  SettingsService], (menuService, userblockService, settingsService) => {

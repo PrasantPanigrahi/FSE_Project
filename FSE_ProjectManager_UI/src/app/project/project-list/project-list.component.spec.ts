@@ -1,23 +1,24 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ProjectListComponent } from './project-list.component';
 
 describe('ProjectListComponent', () => {
   let component: ProjectListComponent;
   let fixture: ComponentFixture<ProjectListComponent>;
 
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProjectListComponent ]
+      declarations: [ ProjectListComponent ]     
+      // imports: [FormsModule,ReactiveFormsModule, RouterTestingModule,HttpClientModule],
+      // schemas: [
+      //   CUSTOM_ELEMENTS_SCHEMA
+      // ],
+      // providers: [ProjectService,MessageService,ConfirmationService,TableFilterStateService]
+
     })
     .compileComponents();
   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ProjectListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
 
   xit('should create', () => {
     expect(component).toBeTruthy();

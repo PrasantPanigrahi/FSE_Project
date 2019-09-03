@@ -7,7 +7,7 @@ describe('SharedModule', () => {
     sharedModule = new SharedModule();
   });
 
-  xit('should create an instance', () => {
+  it('should create an instance', () => {
     expect(sharedModule).toBeTruthy();
   });
 });
