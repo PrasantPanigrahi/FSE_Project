@@ -18,6 +18,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class UserDetailComponent implements OnInit {
 
   ready = true;
+  id:any;
   userForm: FormGroup;
   private firstName: FormControl;
   private lastName: FormControl;
@@ -53,9 +54,9 @@ export class UserDetailComponent implements OnInit {
   }
 
   loadUser() {
-    const id = this.router.snapshot.paramMap.get('id');
-    if (!common.isNil(id)) {
-      this.userService.get(id)
+     this.id = this.router.snapshot.paramMap.get('id');
+    if (!common.isNil(this.id)) {
+      this.userService.get(this.id)
         .subscribe(user => {
           this.instantiateUser(user);
           this.ready = true;

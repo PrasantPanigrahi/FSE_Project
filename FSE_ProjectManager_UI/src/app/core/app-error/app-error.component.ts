@@ -1,5 +1,4 @@
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/api';
-
 import { Component, OnInit } from '@angular/core';
 
 @Component({
