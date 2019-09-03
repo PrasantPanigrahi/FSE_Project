@@ -10,7 +10,7 @@
     </Module>
     <Module skippedDueTo="MissingPdb" hash="C3-AA-1C-1C-8E-82-1A-33-B0-D2-15-D7-67-2F-0B-23-E3-D3-35-BD">
       <ModulePath>C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\packages\NUnit.ConsoleRunner.3.10.0\tools\nunit3-console.exe</ModulePath>
-      <ModuleTime>2019-03-24T08:23:50Z</ModuleTime>
+      <ModuleTime>2019-08-25T06:38:54Z</ModuleTime>
       <ModuleName>nunit3-console</ModuleName>
       <Classes />
     </Module>
@@ -22,13 +22,13 @@
     </Module>
     <Module skippedDueTo="MissingPdb" hash="56-19-46-EE-B2-F2-BE-59-B4-C3-2F-4A-6E-93-59-8A-52-CC-E1-25">
       <ModulePath>C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\packages\NUnit.ConsoleRunner.3.10.0\tools\nunit.engine.api.dll</ModulePath>
-      <ModuleTime>2019-03-24T08:23:50Z</ModuleTime>
+      <ModuleTime>2019-08-25T06:38:54Z</ModuleTime>
       <ModuleName>nunit.engine.api</ModuleName>
       <Classes />
     </Module>
     <Module skippedDueTo="MissingPdb" hash="F3-B1-83-1B-09-4C-8B-4B-4D-F1-AE-22-3B-BF-1C-83-85-41-B0-4C">
       <ModulePath>C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\packages\NUnit.ConsoleRunner.3.10.0\tools\nunit.engine.dll</ModulePath>
-      <ModuleTime>2019-03-24T08:23:50Z</ModuleTime>
+      <ModuleTime>2019-08-25T06:38:54Z</ModuleTime>
       <ModuleName>nunit.engine</ModuleName>
       <Classes />
     </Module>
@@ -46,7 +46,7 @@
     </Module>
     <Module skippedDueTo="MissingPdb" hash="8A-2E-8F-D6-9D-39-02-4A-2F-30-FC-06-42-F7-0F-A8-32-69-07-72">
       <ModulePath>C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\packages\NUnit.ConsoleRunner.3.10.0\tools\Mono.Cecil.dll</ModulePath>
-      <ModuleTime>2019-03-24T08:23:50Z</ModuleTime>
+      <ModuleTime>2019-08-25T06:38:54Z</ModuleTime>
       <ModuleName>Mono.Cecil</ModuleName>
       <Classes />
     </Module>
@@ -64,13 +64,13 @@
     </Module>
     <Module skippedDueTo="MissingPdb" hash="DD-03-C0-F6-30-61-DA-66-3E-7C-57-4F-A1-08-5C-81-F5-6E-EF-AA">
       <ModulePath>C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\packages\NUnit.ConsoleRunner.3.10.0\tools\nunit-agent.exe</ModulePath>
-      <ModuleTime>2019-03-24T08:23:50Z</ModuleTime>
+      <ModuleTime>2019-08-25T06:38:54Z</ModuleTime>
       <ModuleName>nunit-agent</ModuleName>
       <Classes />
     </Module>
     <Module skippedDueTo="Filter" hash="EE-92-34-AE-A6-A6-A8-2E-8A-34-A1-E4-20-3D-2A-23-C5-9D-D8-D2">
       <ModulePath>C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\nunit.framework.dll</ModulePath>
-      <ModuleTime>2018-10-06T08:52:56Z</ModuleTime>
+      <ModuleTime>2019-08-25T06:38:54Z</ModuleTime>
       <ModuleName>nunit.framework</ModuleName>
       <Classes />
     </Module>
@@ -80,28 +80,28 @@
       <ModuleName>System.Core</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="56-56-5E-ED-25-A0-32-22-8D-12-8F-F4-E1-93-7E-75-38-BC-3E-5C">
+    <Module skippedDueTo="Filter" hash="EE-7A-2E-07-75-88-78-3D-CC-9B-90-FD-26-0C-F1-48-05-75-94-C2">
       <ModulePath>C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\PM.Web.Tests.dll</ModulePath>
-      <ModuleTime>2019-08-26T15:42:16.867734Z</ModuleTime>
+      <ModuleTime>2019-08-25T13:39:31.2651834Z</ModuleTime>
       <ModuleName>PM.Web.Tests</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="F9-D7-25-C3-F8-B4-9A-B7-43-51-5B-4E-C7-11-0F-C6-58-A9-0C-83">
+    <Module skippedDueTo="Filter" hash="D9-6B-25-93-2D-3C-2F-9F-63-A5-D6-4C-FA-59-7F-1D-E3-CC-6B-AD">
       <ModulePath>C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\PM.Utilities.dll</ModulePath>
-      <ModuleTime>2019-08-26T15:42:06.229058Z</ModuleTime>
+      <ModuleTime>2019-08-25T13:39:23.4461873Z</ModuleTime>
       <ModuleName>PM.Utilities</ModuleName>
       <Classes />
     </Module>
     <Module skippedDueTo="MissingPdb" hash="51-6C-AE-C4-00-A1-8F-AA-38-03-66-6C-39-26-14-43-F6-EE-88-E8">
       <ModulePath>C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\NBench.dll</ModulePath>
-      <ModuleTime>2017-06-10T09:09:32Z</ModuleTime>
+      <ModuleTime>2019-08-25T06:38:54Z</ModuleTime>
       <ModuleName>NBench</ModuleName>
       <Classes />
     </Module>
     <Module hash="7C-69-45-A2-B2-22-2E-D6-50-0B-62-F5-B7-10-62-6F-64-AB-91-D9">
       <Summary numSequencePoints="226" visitedSequencePoints="226" numBranchPoints="71" visitedBranchPoints="70" sequenceCoverage="100" branchCoverage="98.59" maxCyclomaticComplexity="5" minCyclomaticComplexity="1" visitedClasses="5" numClasses="5" visitedMethods="25" numMethods="25" />
       <ModulePath>C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\PM.Extensions.dll</ModulePath>
-      <ModuleTime>2019-08-26T15:42:08.444055Z</ModuleTime>
+      <ModuleTime>2019-08-25T13:39:24.8931895Z</ModuleTime>
       <ModuleName>PM.Extensions</ModuleName>
       <Files>
         <File uid="1" fullPath="C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Extensions\ParentTaskFacade.cs" />
@@ -1219,9 +1219,9 @@
         </Class>
       </Classes>
     </Module>
-    <Module skippedDueTo="MissingPdb" hash="80-26-EF-AD-E4-AF-8D-E5-CB-A7-26-59-14-CA-09-D9-D9-57-BA-81">
+    <Module skippedDueTo="MissingPdb" hash="26-C7-8D-AD-61-2A-FF-90-4F-21-6F-19-F4-90-89-F8-4C-C7-7E-B8">
       <ModulePath>C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\Newtonsoft.Json.dll</ModulePath>
-      <ModuleTime>2018-02-18T01:44:54Z</ModuleTime>
+      <ModuleTime>2019-08-25T06:38:54Z</ModuleTime>
       <ModuleName>Newtonsoft.Json</ModuleName>
       <Classes />
     </Module>
@@ -1269,14 +1269,14 @@
     </Module>
     <Module skippedDueTo="Filter" hash="C2-3B-E2-23-1D-40-47-0C-2F-69-F3-61-29-B9-9C-B9-58-54-07-8F">
       <ModulePath>C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\AutoMapper.dll</ModulePath>
-      <ModuleTime>2017-12-06T07:08:08Z</ModuleTime>
+      <ModuleTime>2019-08-25T06:38:54Z</ModuleTime>
       <ModuleName>AutoMapper</ModuleName>
       <Classes />
     </Module>
-    <Module hash="9C-D4-A9-32-8C-61-9F-EA-46-11-B0-46-35-54-F3-80-67-8D-02-F1">
+    <Module hash="06-97-26-3E-DD-1A-E9-43-5A-E6-38-3C-3E-C8-AC-AB-B1-2D-2B-8F">
       <Summary numSequencePoints="197" visitedSequencePoints="184" numBranchPoints="67" visitedBranchPoints="64" sequenceCoverage="93.40" branchCoverage="95.52" maxCyclomaticComplexity="15" minCyclomaticComplexity="1" visitedClasses="22" numClasses="24" visitedMethods="64" numMethods="67" />
       <ModulePath>C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\PM.Web.dll</ModulePath>
-      <ModuleTime>2019-08-26T15:42:11.510609Z</ModuleTime>
+      <ModuleTime>2019-08-25T13:39:27.045187Z</ModuleTime>
       <ModuleName>PM.Web</ModuleName>
       <Files>
         <File uid="17" fullPath="C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web\App_Start\SwaggerConfig.cs" />
@@ -2647,37 +2647,37 @@
     </Module>
     <Module skippedDueTo="Filter" hash="32-97-A2-6C-AC-49-E0-83-E2-C7-8A-A6-D8-8E-FA-04-C2-9F-C3-CC">
       <ModulePath>C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\PM.Models.dll</ModulePath>
-      <ModuleTime>2019-08-26T15:42:06.2310492Z</ModuleTime>
+      <ModuleTime>2019-08-25T13:39:21.7721926Z</ModuleTime>
       <ModuleName>PM.Models</ModuleName>
       <Classes />
     </Module>
     <Module skippedDueTo="Filter" hash="5B-94-34-21-56-F6-B0-55-E7-72-C1-82-5F-A6-D3-2C-2A-11-4A-9C">
       <ModulePath>C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\PM.DAL.dll</ModulePath>
-      <ModuleTime>2019-08-26T15:42:07.4260562Z</ModuleTime>
+      <ModuleTime>2019-08-25T13:39:24.2711869Z</ModuleTime>
       <ModuleName>PM.DAL</ModuleName>
       <Classes />
     </Module>
     <Module skippedDueTo="Filter" hash="F9-9B-B5-71-3A-BE-A4-D1-7B-42-24-6F-13-97-0A-EB-C4-29-42-FE">
       <ModulePath>C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\System.Web.Http.dll</ModulePath>
-      <ModuleTime>2018-05-10T14:39:16Z</ModuleTime>
+      <ModuleTime>2019-08-25T06:38:54Z</ModuleTime>
       <ModuleName>System.Web.Http</ModuleName>
       <Classes />
     </Module>
     <Module skippedDueTo="MissingPdb" hash="22-3C-EF-E8-08-72-8E-67-F2-D1-FC-6F-0F-81-A9-AF-49-0D-0F-33">
       <ModulePath>C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\Moq.dll</ModulePath>
-      <ModuleTime>2019-06-20T00:49:52Z</ModuleTime>
+      <ModuleTime>2019-08-25T06:38:54Z</ModuleTime>
       <ModuleName>Moq</ModuleName>
       <Classes />
     </Module>
     <Module skippedDueTo="MissingPdb" hash="DC-CC-6B-85-DE-D3-FF-D6-B1-BF-5C-63-F6-46-A9-1A-1D-EF-79-5B">
       <ModulePath>C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\Castle.Core.dll</ModulePath>
-      <ModuleTime>2019-04-04T17:50:26Z</ModuleTime>
+      <ModuleTime>2019-08-25T06:38:54Z</ModuleTime>
       <ModuleName>Castle.Core</ModuleName>
       <Classes />
     </Module>
     <Module skippedDueTo="Filter" hash="B6-3D-95-5E-A1-F2-3D-D5-61-A7-8A-59-69-72-6D-F6-FF-70-71-9F">
       <ModulePath>C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\System.Threading.Tasks.Extensions.dll</ModulePath>
-      <ModuleTime>2018-06-06T05:29:04Z</ModuleTime>
+      <ModuleTime>2019-08-25T06:38:54Z</ModuleTime>
       <ModuleName>System.Threading.Tasks.Extensions</ModuleName>
       <Classes />
     </Module>
@@ -2689,19 +2689,19 @@
     </Module>
     <Module skippedDueTo="MissingPdb" hash="75-E8-45-F7-55-0B-30-E9-B6-D4-8C-4F-F4-0E-32-8A-69-8B-83-7B">
       <ModulePath>C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\Serilog.dll</ModulePath>
-      <ModuleTime>2019-01-16T15:25:02Z</ModuleTime>
+      <ModuleTime>2019-08-25T06:38:54Z</ModuleTime>
       <ModuleName>Serilog</ModuleName>
       <Classes />
     </Module>
     <Module skippedDueTo="MissingPdb" hash="12-3F-E3-10-D1-D0-35-93-2B-65-FA-C5-00-62-09-C4-DC-D6-92-BF">
       <ModulePath>C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\EntityFramework.dll</ModulePath>
-      <ModuleTime>2017-10-23T05:15:18Z</ModuleTime>
+      <ModuleTime>2019-08-25T06:38:54Z</ModuleTime>
       <ModuleName>EntityFramework</ModuleName>
       <Classes />
     </Module>
     <Module skippedDueTo="MissingPdb" hash="9D-8C-F0-38-93-AA-F9-80-7F-99-3F-48-55-49-21-AF-A0-81-85-9F">
       <ModulePath>C:\Users\prapan\Source\Repos\FSE_Project\FSE_ProjectManager\PM.Web.Tests\bin\Debug\EntityFramework.SqlServer.dll</ModulePath>
-      <ModuleTime>2017-10-23T05:15:20Z</ModuleTime>
+      <ModuleTime>2019-08-25T06:38:54Z</ModuleTime>
       <ModuleName>EntityFramework.SqlServer</ModuleName>
       <Classes />
     </Module>
